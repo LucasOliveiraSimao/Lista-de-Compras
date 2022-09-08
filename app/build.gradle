@@ -67,13 +67,12 @@ dependencies {
 
     androidTestImplementation Deps.test_ext
     androidTestImplementation Deps.truth
-//    androidTestImplementation Deps.espresso_core
     androidTestImplementation Deps.runner
     androidTestImplementation Deps.core_testing
-//    androidTestImplementation Deps.hamcrest
     androidTestImplementation Deps.test_rules
-//    androidTestImplementation (Deps.barista){
-//        exclude group: "org.jetbrains.kotlin"
-//    }
+    androidTestImplementation(Deps.barista) {
+        exclude group: "org.jetbrains.kotlin"
+        exclude group: "org.checkerframework", module: "checker"
+    }
     implementation Deps.idling_resource
 }
