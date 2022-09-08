@@ -19,7 +19,8 @@ class PurchaseViewModel(
         )
     }
 
-    fun insert(purchaseItem: PurchaseModel) {
+    fun insert(name: String, quantity: Int, price: String) {
+        val purchaseItem = PurchaseModel(0, name, quantity, price)
         viewModelScope.launch {
             repository.insert(purchaseItem)
         }

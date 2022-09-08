@@ -25,7 +25,11 @@ class PurchaseViewModelTest : BaseUnitTest() {
 
         val viewModel = PurchaseViewModel(repository)
 
-        viewModel.insert(purchaseItem)
+        viewModel.insert(
+            purchaseItem,
+            etPurchaseQuantity.text.toString(),
+            etPurchasePrice.text.toString()
+        )
 
         verify(repository, times(1)).insert(purchaseItem)
     }

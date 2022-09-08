@@ -9,5 +9,14 @@
         android:id="@+id/homeFragment"
         android:name="com.lucassimao.listadecompras.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_insertFragment"
+            app:destination="@id/insertFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/insertFragment"
+        android:name="com.lucassimao.listadecompras.ui.InsertFragment"
+        android:label="fragment_insert"
+        tools:layout="@layout/fragment_insert" />
 </navigation>
