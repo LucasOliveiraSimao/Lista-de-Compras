@@ -26,13 +26,13 @@
         android:layout_weight="2"
         android:gravity="center"
         android:padding="5dp"
+        android:text="@string/price_total_purchase"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/fab_insert_purchase"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_list_purchases"
-        tools:text="Total: 100,62" />
+        app:layout_constraintTop_toBottomOf="@id/rv_list_purchases" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_insert_purchase"

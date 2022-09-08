@@ -33,14 +33,19 @@ class HomeFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = PurchaseAdapter(onItemClick = {
-
+            deletePurchase(it)
         })
 
         binding.rvListPurchases.adapter = adapter
+
         viewModel.getAllPurchase.observe(viewLifecycleOwner) {
             adapter.submitList(it)
             sumPurchases(it)
         }
+    }
+
+    private fun deletePurchase(it: PurchaseModel) {
+        viewModel.delete(it)
     }
 
     private fun sumPurchases(it: List<PurchaseModel>?) {

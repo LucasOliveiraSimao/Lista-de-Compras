@@ -59,7 +59,7 @@
 
 
         <ImageView
-            android:id="@+id/iv_delete_note"
+            android:id="@+id/item_delete_purchase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
