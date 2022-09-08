@@ -63,6 +63,7 @@ dependencies {
     testImplementation Deps.mockito_kotlin
     testImplementation Deps.mockito_inline
     testImplementation Deps.coroutines_test
+    testImplementation Deps.core_testing
 
     androidTestImplementation Deps.test_ext
     androidTestImplementation Deps.truth

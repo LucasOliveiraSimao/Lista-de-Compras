@@ -2,6 +2,7 @@ package com.lucassimao.listadecompras.di
 
 import android.app.Application
 import androidx.room.Room
+import com.lucassimao.listadecompras.data.PurchaseRepository
 import com.lucassimao.listadecompras.data.db.PurchaseDAO
 import com.lucassimao.listadecompras.data.db.PurchaseDatabase
 import org.koin.android.ext.koin.androidApplication
@@ -22,4 +23,8 @@ val databaseModule = module {
 
     single { providePurchaseDatabase(androidApplication()) }
     single { providePurchaseDAO(get()) }
+}
+
+val repositoryModule = module {
+    factory { PurchaseRepository(get()) }
 }
