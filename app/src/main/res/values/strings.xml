@@ -13,4 +13,8 @@
     <string name="insert">Salvar</string>
     <string name="warning_message">Campo vazio !</string>
     <string name="save_message">Salvo</string>
+    <string name="total_price">R$ %1$s</string>
+    <string name="test_product_name">Arroz</string>
+    <string name="test_product_quantity">1</string>
+    <string name="test_product_price">1,88</string>
 </resources>
