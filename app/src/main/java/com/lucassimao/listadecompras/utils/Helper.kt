@@ -3,6 +3,7 @@ package com.lucassimao.listadecompras.utils
 import android.text.Editable
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
+import java.text.DecimalFormat
 
 fun isFieldValid(view: View, message: String, field: Editable): Boolean {
     return if (field.isEmpty()) {
@@ -14,4 +15,9 @@ fun isFieldValid(view: View, message: String, field: Editable): Boolean {
     } else {
         true
     }
+}
+
+fun formatPrice(priceTotal: Double): String {
+    val formatPrice = DecimalFormat("#.##")
+    return formatPrice.format(priceTotal).toString()
 }
