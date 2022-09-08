@@ -6,4 +6,11 @@
     <string name="price">Preço</string>
     <string name="delete">Apagar</string>
     <string name="add">Adicionar</string>
+    <string name="add_item_car">Adicionar item no carrrinho</string>
+    <string name="product">Produto</string>
+    <string name="quantity">Quantidade</string>
+    <string name="cancel">Cancelar</string>
+    <string name="insert">Salvar</string>
+    <string name="warning_message">Campo vazio !</string>
+    <string name="save_message">Salvo</string>
 </resources>
