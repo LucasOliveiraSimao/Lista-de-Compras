@@ -34,6 +34,8 @@ class HomeFragment : Fragment() {
     private fun setupRecyclerView() {
         adapter = PurchaseAdapter(onItemClick = {
             deletePurchase(it)
+        }, onLongItemClick = {
+            goToUpdatePurchaseFragment(it)
         })
 
         binding.rvListPurchases.adapter = adapter
@@ -42,6 +44,14 @@ class HomeFragment : Fragment() {
             adapter.submitList(it)
             sumPurchases(it)
         }
+    }
+
+    private fun goToUpdatePurchaseFragment(item: PurchaseModel) {
+        val bundle = Bundle()
+        bundle.putParcelable("key", item)
+        findNavController().navigate(
+            R.id.action_homeFragment_to_updateFragment, bundle
+        )
     }
 
     private fun deletePurchase(it: PurchaseModel) {
@@ -53,7 +63,8 @@ class HomeFragment : Fragment() {
         it?.forEach {
             priceTotal += (it.item_price.toDouble().times(it.item_quantity))
         }
-        binding.tvTotal.text = resources.getString(R.string.total_price, formatPrice(priceTotal))
+        binding.tvTotal.text =
+            resources.getString(R.string.total_price, formatPrice(priceTotal))
     }
 
 }

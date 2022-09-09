@@ -26,7 +26,8 @@ class PurchaseViewModel(
         }
     }
 
-    fun update(purchaseItem: PurchaseModel) {
+    fun update(id: Int, name: String, quantity: Int, price: String) {
+        val purchaseItem = PurchaseModel(id, name, quantity, price)
         viewModelScope.launch {
             repository.update(purchaseItem)
         }
