@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_homeFragment_to_insertFragment"
             app:destination="@id/insertFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
     </fragment>
     <fragment
         android:id="@+id/insertFragment"
         android:name="com.lucassimao.listadecompras.ui.InsertFragment"
         android:label="fragment_insert"
         tools:layout="@layout/fragment_insert" />
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.lucassimao.listadecompras.ui.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" />
 </navigation>

@@ -10,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.lucassimao.listadecompras.R
 import com.lucassimao.listadecompras.databinding.FragmentInsertBinding
 import com.lucassimao.listadecompras.utils.isFieldValid
+import com.lucassimao.listadecompras.utils.warningMessage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class InsertFragment : Fragment() {
@@ -31,29 +32,20 @@ class InsertFragment : Fragment() {
     }
 
     private fun checkFields(): (View) -> Unit = {
-        if (isFieldValid(
-                requireView(),
-                getString(R.string.warning_message),
-                binding.etPurchaseName.text
-            )
-        ) {
-            if (isFieldValid(
-                    requireView(),
-                    getString(R.string.warning_message),
-                    binding.etPurchaseQuantity.text
-                )
-            ) {
-                if (isFieldValid(
-                        requireView(),
-                        getString(R.string.warning_message),
-                        binding.etPurchasePrice.text
-                    )
-                ) {
-                    insertPurchase()
-                }
-            }
-        }
+        val view = requireView()
+        val message = getString(R.string.warning_message)
 
+        if (!isFieldValid(binding.etPurchaseName.text)) {
+            warningMessage(view, message).show()
+        }
+        if (!isFieldValid(binding.etPurchaseQuantity.text)) {
+            warningMessage(view, message).show()
+        }
+        if (!isFieldValid(binding.etPurchasePrice.text)) {
+            warningMessage(view, message).show()
+        } else {
+            insertPurchase()
+        }
     }
 
     private fun insertPurchase() {
@@ -64,7 +56,8 @@ class InsertFragment : Fragment() {
                 etPurchasePrice.text.toString()
             )
         }
-        Snackbar.make(requireView(), getString(R.string.save_message), 4000).show()
+        Snackbar.make(requireView(), getString(R.string.save_message), Snackbar.LENGTH_SHORT).show()
+        findNavController().popBackStack()
     }
 
 }

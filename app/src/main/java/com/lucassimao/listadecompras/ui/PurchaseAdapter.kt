@@ -9,11 +9,12 @@ import com.lucassimao.listadecompras.databinding.ItemPurchaseBinding
 import com.lucassimao.listadecompras.utils.formatPrice
 
 class PurchaseAdapter(
-    private val onItemClick: (PurchaseModel) -> Unit
+    private val onItemClick: (PurchaseModel) -> Unit,
+    private val onLongItemClick: (PurchaseModel) -> Unit
 ) : ListAdapter<PurchaseModel, PurchaseViewHolder>(PurchaseModel) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PurchaseViewHolder {
-        return PurchaseViewHolder.from(parent, onItemClick)
+        return PurchaseViewHolder.from(parent, onItemClick, onLongItemClick)
     }
 
     override fun onBindViewHolder(holder: PurchaseViewHolder, position: Int) {
@@ -23,7 +24,8 @@ class PurchaseAdapter(
 
 class PurchaseViewHolder(
     private val binding: ItemPurchaseBinding,
-    private val onItemClick: (PurchaseModel) -> Unit
+    private val onItemClick: (PurchaseModel) -> Unit,
+    private val onLongItemClick: (PurchaseModel) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: PurchaseModel) {
@@ -35,7 +37,8 @@ class PurchaseViewHolder(
                 onItemClick(item)
             }
             itemView.setOnClickListener {
-                onItemClick(item)
+                onLongItemClick(item)
+                return@setOnClickListener
             }
         }
     }
@@ -43,11 +46,13 @@ class PurchaseViewHolder(
     companion object {
         fun from(
             parent: ViewGroup,
-            onItemClick: (PurchaseModel) -> Unit
+            onItemClick: (PurchaseModel) -> Unit,
+            onLongItemClick: (PurchaseModel) -> Unit
         ): PurchaseViewHolder {
             return PurchaseViewHolder(
                 ItemPurchaseBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-                onItemClick
+                onItemClick,
+                onLongItemClick
             )
         }
     }
