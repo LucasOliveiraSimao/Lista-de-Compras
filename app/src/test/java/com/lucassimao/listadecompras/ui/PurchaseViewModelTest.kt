@@ -16,7 +16,7 @@ import org.junit.Test
 class PurchaseViewModelTest : BaseUnitTest() {
 
     private val repository: PurchaseRepository = mock()
-    private val purchaseItem = mock<PurchaseModel>()
+    private val purchaseItem = PurchaseModel(0, "Product", 1, "1.99")
     private val purchaseList = mock<List<PurchaseModel>>()
     private val purchaseListEmpty = listOf<PurchaseModel>()
 
@@ -25,11 +25,7 @@ class PurchaseViewModelTest : BaseUnitTest() {
 
         val viewModel = PurchaseViewModel(repository)
 
-        viewModel.insert(
-            purchaseItem,
-            etPurchaseQuantity.text.toString(),
-            etPurchasePrice.text.toString()
-        )
+        viewModel.insert("Product", 1, "1.99")
 
         verify(repository, times(1)).insert(purchaseItem)
     }
@@ -39,7 +35,7 @@ class PurchaseViewModelTest : BaseUnitTest() {
 
         val viewModel = PurchaseViewModel(repository)
 
-        viewModel.update(purchaseItem)
+        viewModel.update(0, "Product", 1, "1.99")
 
         verify(repository, times(1)).update(purchaseItem)
     }
@@ -67,7 +63,8 @@ class PurchaseViewModelTest : BaseUnitTest() {
 
         val viewModel = mockEmptyCase()
 
-        Truth.assertThat(purchaseListEmpty.size).isEqualTo(viewModel.getAllPurchase.getValueForTest()!!.size)
+        Truth.assertThat(purchaseListEmpty.size)
+            .isEqualTo(viewModel.getAllPurchase.getValueForTest()!!.size)
     }
 
     private fun mockEmptyCase(): PurchaseViewModel {
