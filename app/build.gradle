@@ -1,0 +1,79 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.lucassimao.listadecompras"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+
+    implementation Deps.core_ktx
+    implementation Deps.appcompat
+    implementation Deps.material
+    implementation Deps.constraint_layout
+    implementation Deps.activity_ktx
+
+    implementation Deps.room_runtime
+    implementation Deps.room_ktx
+    kapt Deps.room_compiler
+
+    implementation Deps.coroutines_android
+    implementation Deps.coroutines_core
+
+    implementation Deps.view_model
+    implementation Deps.livedata
+
+    implementation Deps.koin
+
+    implementation Deps.navigation_fragment
+    implementation Deps.navigation_ui
+
+    testImplementation Deps.truth
+    testImplementation Deps.mockito_kotlin
+    testImplementation Deps.mockito_inline
+    testImplementation Deps.coroutines_test
+    testImplementation Deps.core_testing
+
+    androidTestImplementation Deps.test_ext
+    androidTestImplementation Deps.truth
+    androidTestImplementation Deps.runner
+    androidTestImplementation Deps.core_testing
+    androidTestImplementation Deps.test_rules
+    androidTestImplementation(Deps.barista) {
+        exclude group: "org.jetbrains.kotlin"
+        exclude group: "org.checkerframework", module: "checker"
+    }
+    implementation Deps.idling_resource
+}
