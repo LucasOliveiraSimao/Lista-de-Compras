@@ -2,12 +2,6 @@
     <string name="app_name">Lista de Compras</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="times">X</string>
-    <string name="price">Preço</string>
-    <string name="add_item_car">Adicionar item no carrrinho</string>
-    <string name="product">Produto</string>
-    <string name="quantity">Quantidade</string>
-    <string name="cancel">Cancelar</string>
-    <string name="insert">Salvar</string>
     <string name="warning_message">Campo vazio !</string>
     <string name="save_message">Salvo</string>
     <string name="total_price">Total: %1$s</string>
@@ -23,4 +17,14 @@
     <string name="home_price_total_purchase">Total: R$ 100,00</string>
     <string name="home_description_add">Adicionar</string>
     <!--  Home screen end  -->
+
+    <!--  Insert screen start  -->
+    <string name="insert_add_item_car">Adicionar item no carrrinho</string>
+    <string name="insert_product">Produto</string>
+    <string name="insert_quantity">Quantidade</string>
+    <string name="insert_price">Preço</string>
+    <string name="insert_cancel">Cancelar</string>
+    <string name="insert_save">Salvar</string>
+    <!--  Insert screen end  -->
+
 </resources>
