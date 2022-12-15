@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_item_textView_padding">5dp</dimen>
+    <dimen name="default_item_cardView_cardElevation">3dp</dimen>
+    <dimen name="default_item_cardView_cardCornerRadius">5dp</dimen>
+    <dimen name="default_item_cardView_margin">5dp</dimen>
+    <dimen name="default_item_constraintLayout_marginHorizontal">8dp</dimen>
+    <dimen name="default_home_constraintLayout_padding">8dp</dimen>
+</resources>
