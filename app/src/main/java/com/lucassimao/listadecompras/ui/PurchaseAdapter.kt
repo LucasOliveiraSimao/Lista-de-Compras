@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lucassimao.listadecompras.data.model.PurchaseModel
 import com.lucassimao.listadecompras.databinding.ItemPurchaseBinding
 import com.lucassimao.listadecompras.utils.formatPrice
+import com.lucassimao.listadecompras.utils.formatQuantity
 
 class PurchaseAdapter(
     private val onItemClick: (PurchaseModel) -> Unit,
@@ -31,11 +32,11 @@ class PurchaseViewHolder(
     fun bind(item: PurchaseModel) {
         binding.apply {
             itemName.text = item.item_name
-            itemQuantity.text = item.item_quantity.toString()
+            itemQuantity.text = formatQuantity(item.item_quantity.toString())
             itemPrice.text = formatPrice(item.item_price.toDouble())
-            itemDeletePurchase.setOnClickListener {
-                onItemClick(item)
-            }
+//            itemDeletePurchase.setOnClickListener {
+//                onItemClick(item)
+//            }
             itemView.setOnClickListener {
                 onLongItemClick(item)
                 return@setOnClickListener

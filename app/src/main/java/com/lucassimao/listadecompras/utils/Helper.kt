@@ -4,6 +4,8 @@ import android.text.Editable
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.Locale
 
 fun isFieldValid(field: Editable): Boolean {
     if (field.isEmpty()) {
@@ -22,6 +24,10 @@ fun warningMessage(view: View, message: String): Snackbar = Snackbar.make(
 )
 
 fun formatPrice(priceTotal: Double): String {
-    val formatPrice = DecimalFormat("#.##")
-    return formatPrice.format(priceTotal).toString()
+    val locale = Locale("pt", "BR")
+    return NumberFormat.getCurrencyInstance(locale).format(priceTotal)
+}
+
+fun formatQuantity(quantity: String): String {
+    return "$quantity x"
 }
