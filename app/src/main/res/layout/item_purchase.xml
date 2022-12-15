@@ -48,7 +48,7 @@
             android:id="@+id/item_more_purchase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/delete"
+            android:contentDescription="@string/item_description_delete"
             android:src="@drawable/ic_more_vert"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
