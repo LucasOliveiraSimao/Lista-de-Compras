@@ -40,19 +40,18 @@ class PurchaseDatabaseTest {
     }
 
     @Test
-    fun shouldInsertPurchaseInDatabase() = runBlocking {
+    fun should_insert_new_purchase_in_database() = runBlocking {
         val purchase = purchaseItem(1)
 
         dao.insertPurchase(purchase)
 
-        val response = dao.getAllPurchase().first()
-        val expected = response.contains(purchase)
+        val expected = dao.getAllPurchase().first().contains(purchase)
 
         Truth.assertThat(expected).isTrue()
     }
 
     @Test
-    fun shouldGetAllPurchaseInDatabase() = runBlocking {
+    fun should_get_purchase_list_in_database() = runBlocking {
         val purchase = purchaseItem(1)
         val purchase2 = PurchaseModel(2, "test", 1, "test")
         val purchase3 = PurchaseModel(3, "test", 1, "test")
@@ -61,23 +60,23 @@ class PurchaseDatabaseTest {
         dao.insertPurchase(purchase2)
         dao.insertPurchase(purchase3)
 
-        val response = dao.getAllPurchase().first().size
-        val expected = 3
+        val actual = 3
+        val expected = dao.getAllPurchase().first().size
 
-        Truth.assertThat(expected).isEqualTo(response)
+        Truth.assertThat(actual).isEqualTo(expected)
     }
 
     @Test
-    fun shouldReturnEmptyList_whenGetAllPurchaseIsEmpty() = runBlocking {
+    fun should_return_an_empty_list_when_there_are_no_saved_purchases() = runBlocking {
 
-        val response = dao.getAllPurchase().first().size
-        val expected = 0
+        val actual = 0
+        val expected = dao.getAllPurchase().first().size
 
-        Truth.assertThat(expected).isEqualTo(response)
+        Truth.assertThat(actual).isEqualTo(expected)
     }
 
     @Test
-    fun shouldReturnListSortedInAscendingOrder() = runBlocking {
+    fun should_return_a_list_sorted_in_ascending_order() = runBlocking {
         val purchase = purchaseItem(1)
         val purchase2 = purchaseItem(2)
         val purchase3 = purchaseItem(3)
@@ -86,19 +85,19 @@ class PurchaseDatabaseTest {
         dao.insertPurchase(purchase2)
         dao.insertPurchase(purchase3)
 
-        val response = dao.getAllPurchase().first().sortedWith { first, second ->
+        val expected = dao.getAllPurchase().first().sortedWith { first, second ->
             first.item_id.compareTo(second.item_id)
         }
 
-        val expected = listOf(purchase, purchase2, purchase3).sortedWith { first, second ->
+        val actual = listOf(purchase, purchase2, purchase3).sortedWith { first, second ->
             first.item_id.compareTo(second.item_id)
         }
 
-        Truth.assertThat(expected).isEqualTo(response)
+        Truth.assertThat(actual).isEqualTo(expected)
     }
 
     @Test
-    fun shouldUpdatePurchaseInDatabase() = runBlocking {
+    fun should_update_purchase_field_in_database() = runBlocking {
         val purchase = purchaseItem(1)
         val update = PurchaseModel(1, "test 2", 2, "test 2")
 
@@ -106,24 +105,40 @@ class PurchaseDatabaseTest {
         dao.updatePurchase(update)
 
 
-        val response = dao.getAllPurchase().first()
-        val expected = response.contains(update)
+        val expected = dao.getAllPurchase().first().contains(update)
 
         Truth.assertThat(expected).isTrue()
     }
 
     @Test
-    fun shouldDeletePurchaseInDatabase() = runBlocking {
+    fun should_delete_a_purchase_from_list() = runBlocking {
         val purchase = purchaseItem(1)
 
         dao.insertPurchase(purchase)
         dao.deletePurchase(purchase)
 
 
-        val response = dao.getAllPurchase().first()
-        val expected = response.contains(purchase)
+        val expected = dao.getAllPurchase().first().contains(purchase)
 
         Truth.assertThat(expected).isFalse()
+    }
+
+    @Test
+    fun should_delete_all_items_from_purchase_list() = runBlocking {
+        val purchase = purchaseItem(1)
+        val purchase2 = purchaseItem(2)
+        val purchase3 = purchaseItem(3)
+
+        dao.insertPurchase(purchase)
+        dao.insertPurchase(purchase2)
+        dao.insertPurchase(purchase3)
+
+        dao.deleteAllPurchase()
+
+        val actual = 0
+        val expected = dao.getAllPurchase().first().size
+
+        Truth.assertThat(actual).isEqualTo(expected)
     }
 
     private fun purchaseItem(id: Int) = PurchaseModel(id, "test", 1, "test")
