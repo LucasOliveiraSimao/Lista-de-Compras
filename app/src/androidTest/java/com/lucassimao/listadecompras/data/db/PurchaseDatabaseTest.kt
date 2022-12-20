@@ -41,7 +41,7 @@ class PurchaseDatabaseTest {
 
     @Test
     fun should_insert_new_purchase_in_database() = runBlocking {
-        val purchase = purchaseItem(1)
+        val purchase = PurchaseModel(1, "test", 1, "test")
 
         dao.insertPurchase(purchase)
 
@@ -52,9 +52,9 @@ class PurchaseDatabaseTest {
 
     @Test
     fun should_get_purchase_list_in_database() = runBlocking {
-        val purchase = purchaseItem(1)
-        val purchase2 = PurchaseModel(2, "test", 1, "test")
-        val purchase3 = PurchaseModel(3, "test", 1, "test")
+        val purchase = generatesPurchaseItem(1)
+        val purchase2 = generatesPurchaseItem(2)
+        val purchase3 = generatesPurchaseItem(3)
 
         dao.insertPurchase(purchase)
         dao.insertPurchase(purchase2)
@@ -77,9 +77,9 @@ class PurchaseDatabaseTest {
 
     @Test
     fun should_return_a_list_sorted_in_ascending_order() = runBlocking {
-        val purchase = purchaseItem(1)
-        val purchase2 = purchaseItem(2)
-        val purchase3 = purchaseItem(3)
+        val purchase = generatesPurchaseItem(1)
+        val purchase2 = generatesPurchaseItem(2)
+        val purchase3 = generatesPurchaseItem(3)
 
         dao.insertPurchase(purchase)
         dao.insertPurchase(purchase2)
@@ -98,7 +98,7 @@ class PurchaseDatabaseTest {
 
     @Test
     fun should_update_purchase_field_in_database() = runBlocking {
-        val purchase = purchaseItem(1)
+        val purchase = generatesPurchaseItem(1)
         val update = PurchaseModel(1, "test 2", 2, "test 2")
 
         dao.insertPurchase(purchase)
@@ -112,7 +112,7 @@ class PurchaseDatabaseTest {
 
     @Test
     fun should_delete_a_purchase_from_list() = runBlocking {
-        val purchase = purchaseItem(1)
+        val purchase = generatesPurchaseItem(1)
 
         dao.insertPurchase(purchase)
         dao.deletePurchase(purchase)
@@ -125,9 +125,9 @@ class PurchaseDatabaseTest {
 
     @Test
     fun should_delete_all_items_from_purchase_list() = runBlocking {
-        val purchase = purchaseItem(1)
-        val purchase2 = purchaseItem(2)
-        val purchase3 = purchaseItem(3)
+        val purchase = generatesPurchaseItem(1)
+        val purchase2 = generatesPurchaseItem(2)
+        val purchase3 = generatesPurchaseItem(3)
 
         dao.insertPurchase(purchase)
         dao.insertPurchase(purchase2)
@@ -141,5 +141,5 @@ class PurchaseDatabaseTest {
         Truth.assertThat(actual).isEqualTo(expected)
     }
 
-    private fun purchaseItem(id: Int) = PurchaseModel(id, "test", 1, "test")
+    private fun generatesPurchaseItem(id: Int) = PurchaseModel(id, "test", 1, "test")
 }

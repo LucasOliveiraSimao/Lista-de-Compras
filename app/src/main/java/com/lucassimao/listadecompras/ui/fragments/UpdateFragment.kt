@@ -1,4 +1,4 @@
-package com.lucassimao.listadecompras.ui
+package com.lucassimao.listadecompras.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.lucassimao.listadecompras.R
 import com.lucassimao.listadecompras.data.model.PurchaseModel
 import com.lucassimao.listadecompras.databinding.FragmentUpdateBinding
+import com.lucassimao.listadecompras.ui.PurchaseViewModel
 import com.lucassimao.listadecompras.utils.isFieldValid
 import com.lucassimao.listadecompras.utils.warningMessage
 import org.koin.androidx.viewmodel.ext.android.viewModel
