@@ -42,10 +42,6 @@ jobs:
         SUPER_SECRET: ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }}
       run: |
           echo $SUPER_SECRET | base64 --decode > service-account.json
-    - name: Show certificate information
-      run: |
-          openssl x509 -in service-account.json -inform DER -text -noout
-       
     - name: Bundle
       run: |
          ./gradlew bundleRelease
