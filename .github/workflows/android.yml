@@ -40,4 +40,4 @@ jobs:
       run:
        echo "$GOOGLEPLAY_SERVICE_ACCOUNT_FILE" | base64 -d > app/service-account.json
     - name: Deploy
-      run: ./gradlew publishBundle
+      run: ./gradlew app:publishBundle
