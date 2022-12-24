@@ -38,7 +38,7 @@ jobs:
          
     - name: Deploy to Play Store
       run:
-       echo '${{secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE}}' | base64 -d > app/service-account.json
+       echo ${{  secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE  }} | base64 -d > app/service-account.json
        
     - name: Bundle
       run: |
