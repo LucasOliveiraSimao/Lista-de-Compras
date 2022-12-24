@@ -36,11 +36,19 @@ jobs:
       run: |
          ./gradlew test
          
-    - name: Deploy to Play Store
-      env:
-       SUPER_SECRET: ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }} | base64 --decode > service-account.json
-      run:
-       echo ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }} | base64 --decode > service-account.json
+    - name: Decode secret
+      decode-secret:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v3
+      - name: Retrieve the secret and decode it to a file
+        env:
+        SUPER_SECRET: ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }}
+        run: |
+          echo $SUPER_SECRET | base64 --decode > service-account.json
+      - name: Show certificate information
+        run: |
+          openssl x509 -in service-account.json -inform DER -text -noout
        
     - name: Bundle
       run: |
@@ -49,7 +57,7 @@ jobs:
     - name: Deploy
       uses: r0adkll/upload-google-play@v1
       with:
-        serviceAccountJsonPlainText: "$SUPER_SECRET" 
+        serviceAccountJsonPlainText: $SUPER_SECRET
         packageName: com.lucassimao.listadecompras
         releaseFiles: app/build/outputs/bundle/release/app-release.aab
         track: internal
