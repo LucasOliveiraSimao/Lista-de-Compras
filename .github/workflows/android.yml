@@ -40,9 +40,9 @@ jobs:
       run:
        echo "$GOOGLEPLAY_SERVICE_ACCOUNT_FILE" | base64 -d > app/service-account.json
        
-    - name: Build and test
+    - name: Bundle
       run: |
-         ./gradlew assembleRelease
+         ./gradlew bundleRelease
        
     - name: Deploy
       uses: r0adkll/upload-google-play@v1
