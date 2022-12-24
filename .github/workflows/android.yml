@@ -37,6 +37,8 @@ jobs:
          ./gradlew test
          
     - name: Deploy to Play Store
+      env:
+       SUPER_SECRET: ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }} | base64 -d > service-account.json
       run:
        echo ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }} | base64 -d > service-account.json
        
@@ -47,7 +49,7 @@ jobs:
     - name: Deploy
       uses: r0adkll/upload-google-play@v1
       with:
-        serviceAccountJsonPlainText: service-account.json
+        serviceAccountJsonPlainText: "$SUPER_SECRET" 
         packageName: com.lucassimao.listadecompras
         releaseFiles: app/build/outputs/bundle/release/app-release.aab
         track: internal
