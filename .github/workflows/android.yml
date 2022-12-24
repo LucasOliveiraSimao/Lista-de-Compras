@@ -39,7 +39,7 @@ jobs:
     - name: Deploy to Play Store
       uses: r0adkll/upload-google-play@v1
       with:
-       signingKeyBase64: ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }}
+      serviceAccountJson: ${{ env.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }}
        packageName: com.lucassimao.listadecompras
        releaseFiles: app/build/outputs/bundle/release/*.aab
        track: internal
