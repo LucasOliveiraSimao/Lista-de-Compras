@@ -38,7 +38,7 @@ jobs:
          
     - name: Deploy to Play Store
       run:
-       echo "$GOOGLEPLAY_SERVICE_ACCOUNT_FILE" | base64 -d > app/service-account.json
+       echo "$GOOGLEPLAY_SERVICE_ACCOUNT_FILE" | base64 -d > service-account.json
        
     - name: Bundle
       run: |
@@ -47,7 +47,7 @@ jobs:
     - name: Deploy
       uses: r0adkll/upload-google-play@v1
       with:
-        serviceAccountJson:  echo "$GOOGLEPLAY_SERVICE_ACCOUNT_FILE" | base64 -d > app/service-account.json
+        serviceAccountJson:  echo "$GOOGLEPLAY_SERVICE_ACCOUNT_FILE" | base64 -d > service-account.json
         packageName: com.lucassimao.listadecompras
         releaseFiles: app/build/outputs/bundle/release/app-release.aab
         track: internal
