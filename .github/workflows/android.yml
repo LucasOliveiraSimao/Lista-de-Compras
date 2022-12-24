@@ -49,5 +49,5 @@ jobs:
       with:
         serviceAccountJson:  echo "$GOOGLEPLAY_SERVICE_ACCOUNT_FILE" | base64 -d > app/service-account.json
         packageName: com.lucassimao.listadecompras
-        releaseFiles: app/build/outputs/bundle/release/app-release.aab
+        releaseFiles: /app/build/outputs/bundle/release/app-release.aab
         track: internal
