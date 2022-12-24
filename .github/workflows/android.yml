@@ -33,23 +33,7 @@ jobs:
           ${{ runner.os }}-gradle-
           
     - name: Build and test
-      run: |
-         ./gradlew test
-         
-    - uses: actions/checkout@v3
-    - name: Retrieve the secret and decode it to a file
-      env:
-        SUPER_SECRET: ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }}
-      run: |
-          echo $SUPER_SECRET | base64 --decode > service-account.json
+      run: ./gradlew test
           
     - name: Bundle
       run: bash ./gradlew bundleRelease
-       
-    - name: Deploy
-      uses: r0adkll/upload-google-play@v1
-      with:
-        serviceAccountJsonPlainText: $SUPER_SECRET
-        packageName: com.lucassimao.listadecompras
-        releaseFiles: app/build/outputs/bundle/release/app-release.aab
-        track: internal
