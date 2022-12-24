@@ -38,9 +38,9 @@ jobs:
          
     - name: Deploy to Play Store
       env:
-       SUPER_SECRET: ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }} | base64 -d > service-account.json
+       SUPER_SECRET: ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }} | base64 --decode > service-account.json
       run:
-       echo ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }} | base64 -d > service-account.json
+       echo ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }} | base64 --decode > service-account.json
        
     - name: Bundle
       run: |
