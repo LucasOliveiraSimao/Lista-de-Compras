@@ -38,6 +38,6 @@ jobs:
          
     - name: Deploy to Play Store
       run:
-       echo "$GOOGLEPLAY_SERVICE_ACCOUNT_FILE" | base64 -d > /app/service-account.json
+       echo "$GOOGLEPLAY_SERVICE_ACCOUNT_FILE" | base64 -d > app/service-account.json
     - name: Deploy
       run: ./gradlew publishBundle
