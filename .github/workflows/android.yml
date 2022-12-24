@@ -36,18 +36,14 @@ jobs:
       run: |
          ./gradlew test
          
-    - name: Decode secret
-      decode-secret:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v3
-      - name: Retrieve the secret and decode it to a file
-        env:
+    - uses: actions/checkout@v3
+    - name: Retrieve the secret and decode it to a file
+      env:
         SUPER_SECRET: ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }}
-        run: |
+      run: |
           echo $SUPER_SECRET | base64 --decode > service-account.json
-      - name: Show certificate information
-        run: |
+    - name: Show certificate information
+      run: |
           openssl x509 -in service-account.json -inform DER -text -noout
        
     - name: Bundle
