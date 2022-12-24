@@ -42,9 +42,9 @@ jobs:
         SUPER_SECRET: ${{ secrets.GOOGLEPLAY_SERVICE_ACCOUNT_FILE }}
       run: |
           echo $SUPER_SECRET | base64 --decode > service-account.json
+          
     - name: Bundle
-      run: |
-         ./gradlew bundleRelease
+      run: bash ./gradlew bundleRelease
        
     - name: Deploy
       uses: r0adkll/upload-google-play@v1
