@@ -1,13 +1,14 @@
 name: Android CI
 
 on:
-  pull_request:
+  push:
     branches: [ "develop" ]
 
 jobs:
 
   unit-test:
-    name: Run Unit Tests
+    name: Run Unit Tests 
+    
     runs-on: ubuntu-latest
 
     steps:
