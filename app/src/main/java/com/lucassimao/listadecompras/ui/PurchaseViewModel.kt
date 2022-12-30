@@ -39,4 +39,10 @@ class PurchaseViewModel(
         }
     }
 
+    fun deleteAllPurchase() {
+        viewModelScope.launch {
+            repository.deleteAllPurchases()
+        }
+    }
+
 }
