@@ -46,7 +46,7 @@ class UpdateFragment : Fragment() {
 
     private fun checkFields(bundle: PurchaseModel?): (View) -> Unit = {
         val view = requireView()
-        val message = getString(R.string.warning_message)
+        val message = ""
 
         if (!isFieldValid(binding.updatePurchaseName.text)) {
             warningMessage(message).show()
@@ -71,7 +71,7 @@ class UpdateFragment : Fragment() {
                     updatePurchasePrice.text.toString()
                 )
             }
-            Snackbar.make(requireView(), getString(R.string.save_message), Snackbar.LENGTH_SHORT).show()
+//            Snackbar.make(requireView(), getString(R.string.save_message), Snackbar.LENGTH_SHORT).show()
             findNavController().popBackStack()
         }
     }
