@@ -64,11 +64,22 @@ fun EditText.formatMoneyToBrazilianFormat() {
     })
 }
 
-fun formatPrice(priceTotal: Double): String {
-    val locale = Locale("pt", "BR")
-    return NumberFormat.getCurrencyInstance(locale).format(priceTotal)
+fun String.putBrazilianMoneySymbol(): String {
+    return "R$ $this"
 }
 
-fun formatQuantity(quantity: String): String {
-    return "$quantity x"
+fun Int.putTimesSymbol(): String {
+    return "$this x"
+}
+
+fun String.putPointPrice():String{
+    return this.replace(",",".")
+}
+
+fun String.putCommaPrice():String{
+    return this.replace(".",",")
+}
+
+fun Double.putTwoDecimalPlaces():String{
+    return "%.2f".format(this)
 }
