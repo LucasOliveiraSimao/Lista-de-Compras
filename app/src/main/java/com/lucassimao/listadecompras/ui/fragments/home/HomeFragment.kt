@@ -9,9 +9,10 @@ import androidx.navigation.fragment.findNavController
 import com.lucassimao.listadecompras.R
 import com.lucassimao.listadecompras.data.model.PurchaseModel
 import com.lucassimao.listadecompras.databinding.FragmentHomeBinding
-import com.lucassimao.listadecompras.ui.PurchaseAdapter
 import com.lucassimao.listadecompras.ui.PurchaseViewModel
-import com.lucassimao.listadecompras.utils.formatPrice
+import com.lucassimao.listadecompras.utils.putCommaPrice
+import com.lucassimao.listadecompras.utils.putPointPrice
+import com.lucassimao.listadecompras.utils.putTwoDecimalPlaces
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -34,17 +35,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = PurchaseAdapter(onItemClick = {
-            deletePurchase(it)
-        }, onLongItemClick = {
-            goToUpdatePurchaseFragment(it)
-        })
+
+        adapter = PurchaseAdapter()
 
         binding.rvListPurchases.adapter = adapter
 
         viewModel.getAllPurchase.observe(viewLifecycleOwner) {
             adapter.submitList(it)
-//            sumPurchases(it)
+            sumPurchases(it)
         }
     }
 
@@ -56,17 +54,21 @@ class HomeFragment : Fragment() {
         )
     }
 
-    private fun deletePurchase(it: PurchaseModel) {
-        viewModel.delete(it)
+    private fun sumPurchases(purchases: List<PurchaseModel>?) {
+        var totalAmountOfPurchase = 0.0
+        purchases?.forEach {
+            totalAmountOfPurchase += multiplyQuantityTimesPrice(it)
+        }
+
+        binding.tvTotal.text = displayTotalPrice(totalAmountOfPurchase)
     }
 
-    private fun sumPurchases(it: List<PurchaseModel>?) {
-        var priceTotal = 0.0
-        it?.forEach {
-//            priceTotal += (it.item_price.toDouble().times(it.item_quantity))
-        }
-        binding.tvTotal.text =
-            resources.getString(R.string.total_price, formatPrice(priceTotal))
-    }
+    private fun displayTotalPrice(totalAmountOfPurchase: Double) = resources.getString(
+        R.string.home_total_price,
+        totalAmountOfPurchase.putTwoDecimalPlaces().putCommaPrice()
+    )
+
+    private fun multiplyQuantityTimesPrice(it: PurchaseModel) =
+        (it.item_price.putPointPrice().toDouble().times(it.item_quantity))
 
 }
