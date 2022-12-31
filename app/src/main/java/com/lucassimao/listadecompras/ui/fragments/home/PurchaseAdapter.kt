@@ -13,9 +13,10 @@ import com.lucassimao.listadecompras.utils.showPopupMenu
 class PurchaseAdapter : ListAdapter<PurchaseModel, PurchaseViewHolder>(PurchaseModel) {
 
     var deletePurchase: (PurchaseModel) -> Unit = {}
+    var updatePurchase: (PurchaseModel) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PurchaseViewHolder {
-        return PurchaseViewHolder.from(parent, deletePurchase)
+        return PurchaseViewHolder.from(parent, deletePurchase, updatePurchase)
     }
 
     override fun onBindViewHolder(holder: PurchaseViewHolder, position: Int) {
@@ -25,7 +26,8 @@ class PurchaseAdapter : ListAdapter<PurchaseModel, PurchaseViewHolder>(PurchaseM
 
 class PurchaseViewHolder(
     private val binding: ItemPurchaseBinding,
-    private val deletePurchase: (PurchaseModel) -> Unit
+    private val deletePurchase: (PurchaseModel) -> Unit,
+    private val updatePurchase: (PurchaseModel) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: PurchaseModel) {
@@ -35,17 +37,22 @@ class PurchaseViewHolder(
             itemPrice.text = item.item_price.putBrazilianMoneySymbol()
 
             itemMorePurchase.setOnClickListener {
-                showPopupMenu(item, itemMorePurchase, deletePurchase)
+                showPopupMenu(item, itemMorePurchase, deletePurchase, updatePurchase)
             }
 
         }
     }
 
     companion object {
-        fun from(parent: ViewGroup, deletePurchase: (PurchaseModel) -> Unit): PurchaseViewHolder {
+        fun from(
+            parent: ViewGroup,
+            deletePurchase: (PurchaseModel) -> Unit,
+            updatePurchase: (PurchaseModel) -> Unit
+        ): PurchaseViewHolder {
             return PurchaseViewHolder(
                 ItemPurchaseBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-                deletePurchase
+                deletePurchase,
+                updatePurchase
             )
         }
     }

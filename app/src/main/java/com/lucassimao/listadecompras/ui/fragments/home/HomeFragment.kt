@@ -49,11 +49,19 @@ class HomeFragment : Fragment() {
 
         deletePurchase()
 
+        updatePurchase()
+
         binding.rvListPurchases.adapter = adapter
 
         viewModel.getAllPurchase.observe(viewLifecycleOwner) {
             adapter.submitList(it)
             sumPurchases(it)
+        }
+    }
+
+    private fun updatePurchase() {
+        adapter.updatePurchase = {
+            goToUpdateScreen(it)
         }
     }
 
@@ -63,7 +71,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun goToUpdatePurchaseFragment(item: PurchaseModel) {
+    private fun goToUpdateScreen(item: PurchaseModel) {
         val bundle = Bundle()
         bundle.putParcelable("key", item)
         findNavController().navigate(
