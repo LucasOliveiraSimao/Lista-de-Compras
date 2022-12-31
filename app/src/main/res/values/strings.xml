@@ -28,8 +28,22 @@
     <string name="insert_notice_saved">Produto salvo</string>
     <!--  Insert screen end  -->
 
+    <!--  Update screen start  -->
+    <string name="update_add_item_car">Adicionar item no carrrinho</string>
+    <string name="update_product">Produto</string>
+    <string name="update_quantity">Quantidade</string>
+    <string name="update_price">Preço</string>
+    <string name="update_cancel">Cancelar</string>
+    <string name="update_save">Salvar</string>
+    <string name="update_empty_name_field_warning">Campo nome vazio</string>
+    <string name="update_empty_quantity_field_warning">Campo quantidade vazio</string>
+    <string name="update_empty_price_field_warning">Campo preço vazio</string>
+    <string name="update_notice_saved">Produto salvo</string>
+    <!--  Update screen end  -->
+
     <!--  Popup menu start  -->
     <string name="menu_delete_purchase">Apagar</string>
+    <string name="menu_update_purchase">Editar</string>
     <!--  Popup menu end  -->
 
 </resources>

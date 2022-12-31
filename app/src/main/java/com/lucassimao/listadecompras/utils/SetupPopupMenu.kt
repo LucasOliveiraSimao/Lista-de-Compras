@@ -8,7 +8,8 @@ import com.lucassimao.listadecompras.data.model.PurchaseModel
 fun showPopupMenu(
     item: PurchaseModel,
     itemMorePurchase: ImageView,
-    deletePurchase: (PurchaseModel) -> Unit
+    deletePurchase: (PurchaseModel) -> Unit,
+    updatePurchase: (PurchaseModel) -> Unit
 ) {
     val popupMenu = PopupMenu(itemMorePurchase.context, itemMorePurchase)
     popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
@@ -16,6 +17,9 @@ fun showPopupMenu(
         when (it.itemId) {
             R.id.action_delete -> {
                 deletePurchase(item)
+            }
+            R.id.action_update -> {
+                updatePurchase(item)
             }
         }
         return@setOnMenuItemClickListener true
