@@ -49,13 +49,13 @@ class UpdateFragment : Fragment() {
         val message = getString(R.string.warning_message)
 
         if (!isFieldValid(binding.updatePurchaseName.text)) {
-            warningMessage(view, message).show()
+            warningMessage(message).show()
         }
         if (!isFieldValid(binding.updatePurchaseQuantity.text)) {
-            warningMessage(view, message).show()
+            warningMessage(message).show()
         }
         if (!isFieldValid(binding.updatePurchasePrice.text)) {
-            warningMessage(view, message).show()
+            warningMessage(message).show()
         } else {
             updatePurchase(bundle)
         }

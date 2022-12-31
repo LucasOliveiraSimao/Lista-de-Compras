@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.lucassimao.listadecompras.R
 import com.lucassimao.listadecompras.databinding.FragmentInsertBinding
 import com.lucassimao.listadecompras.ui.PurchaseViewModel
+import com.lucassimao.listadecompras.utils.formatMoneyToBrazilianFormat
 import com.lucassimao.listadecompras.utils.isFieldValid
 import com.lucassimao.listadecompras.utils.warningMessage
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,40 +24,48 @@ class InsertFragment : Fragment() {
     ): View {
         binding = FragmentInsertBinding.inflate(inflater, container, false)
 
-        binding.btnInsert.setOnClickListener(checkFields())
+        binding.etPurchasePrice.formatMoneyToBrazilianFormat()
+
+        binding.btnInsert.setOnClickListener {
+            checkFields()
+        }
+
         binding.btnCancel.setOnClickListener {
-            findNavController().popBackStack()
+            returnToHomeScreen()
         }
 
         return binding.root
     }
 
-    private fun checkFields(): (View) -> Unit = {
-        val view = requireView()
-        val message = getString(R.string.warning_message)
+    private fun checkFields() {
 
         if (!isFieldValid(binding.etPurchaseName.text)) {
-            warningMessage(view, message).show()
+            warningMessage(getString(R.string.insert_empty_name_field_warning)).show()
+            return
         }
         if (!isFieldValid(binding.etPurchaseQuantity.text)) {
-            warningMessage(view, message).show()
+            warningMessage(getString(R.string.insert_empty_quantity_field_warning)).show()
+            return
         }
         if (!isFieldValid(binding.etPurchasePrice.text)) {
-            warningMessage(view, message).show()
-        } else {
-            insertPurchase()
+            warningMessage(getString(R.string.insert_empty_price_field_warning)).show()
+            return
         }
+        insertPurchase()
     }
 
     private fun insertPurchase() {
-        binding.apply {
-            viewModel.insert(
-                etPurchaseName.text.toString(),
-                etPurchaseQuantity.text.toString().toInt(),
-                etPurchasePrice.text.toString()
-            )
-        }
-        Snackbar.make(requireView(), getString(R.string.save_message), Snackbar.LENGTH_SHORT).show()
+        val productName = binding.etPurchaseName.text.toString()
+        val productQuantity = binding.etPurchaseQuantity.text.toString().toInt()
+        val productPrice = binding.etPurchasePrice.text.toString()
+
+        viewModel.insert(productName, productQuantity, productPrice)
+
+        warningMessage(getString(R.string.insert_notice_saved)).show()
+        returnToHomeScreen()
+    }
+
+    private fun returnToHomeScreen() {
         findNavController().popBackStack()
     }
 

@@ -25,6 +25,11 @@
     <string name="insert_price">Preço</string>
     <string name="insert_cancel">Cancelar</string>
     <string name="insert_save">Salvar</string>
+    <string name="insert_empty_name_field_warning">Campo nome vazio</string>
+    <string name="insert_empty_quantity_field_warning">Campo quantidade vazio</string>
+    <string name="insert_empty_price_field_warning">Campo preço vazio</string>
+    <string name="insert_notice_saved">Produto salvo</string>
     <!--  Insert screen end  -->
+
 
 </resources>

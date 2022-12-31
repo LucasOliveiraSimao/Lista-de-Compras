@@ -33,7 +33,7 @@ class PurchaseViewHolder(
         binding.apply {
             itemName.text = item.item_name
             itemQuantity.text = formatQuantity(item.item_quantity.toString())
-            itemPrice.text = formatPrice(item.item_price.toDouble())
+//            itemPrice.text = formatPrice(item.item_price.toDouble())
 //            itemDeletePurchase.setOnClickListener {
 //                onItemClick(item)
 //            }

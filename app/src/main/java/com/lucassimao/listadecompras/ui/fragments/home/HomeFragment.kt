@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
 
         viewModel.getAllPurchase.observe(viewLifecycleOwner) {
             adapter.submitList(it)
-            sumPurchases(it)
+//            sumPurchases(it)
         }
     }
 
@@ -63,7 +63,7 @@ class HomeFragment : Fragment() {
     private fun sumPurchases(it: List<PurchaseModel>?) {
         var priceTotal = 0.0
         it?.forEach {
-            priceTotal += (it.item_price.toDouble().times(it.item_quantity))
+//            priceTotal += (it.item_price.toDouble().times(it.item_quantity))
         }
         binding.tvTotal.text =
             resources.getString(R.string.total_price, formatPrice(priceTotal))
