@@ -31,7 +31,16 @@ class HomeFragment : Fragment() {
         binding.fabInsertPurchase.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_insertFragment)
         }
+
+        binding.btnDeleteAll.setOnClickListener {
+            deleteAllPurchaseList()
+        }
+
         return binding.root
+    }
+
+    private fun deleteAllPurchaseList() {
+        viewModel.deleteAllPurchase()
     }
 
     private fun setupRecyclerView() {
