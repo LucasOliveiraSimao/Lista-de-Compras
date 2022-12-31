@@ -38,11 +38,19 @@ class HomeFragment : Fragment() {
 
         adapter = PurchaseAdapter()
 
+        deletePurchase()
+
         binding.rvListPurchases.adapter = adapter
 
         viewModel.getAllPurchase.observe(viewLifecycleOwner) {
             adapter.submitList(it)
             sumPurchases(it)
+        }
+    }
+
+    private fun deletePurchase() {
+        adapter.deletePurchase = {
+            viewModel.delete(it)
         }
     }
 

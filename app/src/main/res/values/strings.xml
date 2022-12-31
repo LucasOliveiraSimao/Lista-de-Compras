@@ -27,4 +27,8 @@
     <string name="insert_notice_saved">Produto salvo</string>
     <!--  Insert screen end  -->
 
+    <!--  Popup menu start  -->
+    <string name="menu_delete_purchase">Apagar</string>
+    <!--  Popup menu end  -->
+
 </resources>
