@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="5dp"
-        android:text="@string/home_price_total_purchase"
+        tools:text="@string/home_price_total_purchase"
         android:textColor="@color/white"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
