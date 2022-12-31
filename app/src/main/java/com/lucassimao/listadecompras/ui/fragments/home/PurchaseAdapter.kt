@@ -1,4 +1,4 @@
-package com.lucassimao.listadecompras.ui
+package com.lucassimao.listadecompras.ui.fragments.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,16 +6,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lucassimao.listadecompras.data.model.PurchaseModel
 import com.lucassimao.listadecompras.databinding.ItemPurchaseBinding
-import com.lucassimao.listadecompras.utils.formatPrice
-import com.lucassimao.listadecompras.utils.formatQuantity
+import com.lucassimao.listadecompras.utils.putBrazilianMoneySymbol
+import com.lucassimao.listadecompras.utils.putTimesSymbol
 
-class PurchaseAdapter(
-    private val onItemClick: (PurchaseModel) -> Unit,
-    private val onLongItemClick: (PurchaseModel) -> Unit
-) : ListAdapter<PurchaseModel, PurchaseViewHolder>(PurchaseModel) {
+class PurchaseAdapter : ListAdapter<PurchaseModel, PurchaseViewHolder>(PurchaseModel) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PurchaseViewHolder {
-        return PurchaseViewHolder.from(parent, onItemClick, onLongItemClick)
+        return PurchaseViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: PurchaseViewHolder, position: Int) {
@@ -24,36 +21,21 @@ class PurchaseAdapter(
 }
 
 class PurchaseViewHolder(
-    private val binding: ItemPurchaseBinding,
-    private val onItemClick: (PurchaseModel) -> Unit,
-    private val onLongItemClick: (PurchaseModel) -> Unit
+    private val binding: ItemPurchaseBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: PurchaseModel) {
         binding.apply {
             itemName.text = item.item_name
-            itemQuantity.text = formatQuantity(item.item_quantity.toString())
-//            itemPrice.text = formatPrice(item.item_price.toDouble())
-//            itemDeletePurchase.setOnClickListener {
-//                onItemClick(item)
-//            }
-            itemView.setOnClickListener {
-                onLongItemClick(item)
-                return@setOnClickListener
-            }
+            itemQuantity.text = item.item_quantity.putTimesSymbol()
+            itemPrice.text = item.item_price.putBrazilianMoneySymbol()
         }
     }
 
     companion object {
-        fun from(
-            parent: ViewGroup,
-            onItemClick: (PurchaseModel) -> Unit,
-            onLongItemClick: (PurchaseModel) -> Unit
-        ): PurchaseViewHolder {
+        fun from(parent: ViewGroup): PurchaseViewHolder {
             return PurchaseViewHolder(
-                ItemPurchaseBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-                onItemClick,
-                onLongItemClick
+                ItemPurchaseBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             )
         }
     }
