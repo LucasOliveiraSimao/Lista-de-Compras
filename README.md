@@ -1,32 +1,44 @@
-# Lista-de-Compras
+# Lista de Compras
 
-Aplicativo tem como finalidade criar uma lista de compras, com nome do produto, quantidade, preço e calcular o valor total das compras do usuário.<br>
-Projeto desenvolvido utilizando:
+Este é um aplicativo Android em Kotlin para gerenciar suas listas de compras com o preço de cada item. Com ele, você pode criar novas listas de compras, adicionar itens às listas com o nome, quantidade e preço, marcar itens como comprados e exibir a lista de compras de forma organizada com o valor total.
+
+## Recursos
+
+- Criar novas listas de compras
+- Adicionar itens às listas com o nome, quantidade e preço
+- Exibir a lista de compras de forma organizada com o valor total
+
+## Como usar
+
+Para usar este aplicativo, basta seguir os seguintes passos:
+
+1. Baixe o aplicativo na <a href="https://play.google.com/store/apps/details?id=com.lucassimao.listadecompras">Google Play Store</a> ou compile o código fonte do GitHub.
+2. Abra o aplicativo e crie uma nova lista de compras.
+3. Adicione itens à lista de compras com o nome, quantidade e preço.
+
+## Projeto desenvolvido utilizando:
+
  - Kotlin
  - Git Flow
  - Arquitetura MVVM
- - Coroutines
- - Kotlin Flow
+ - Coroutines e Kotlin Flow
  - ViewModel e LiveData
  - Navigation
  - Gerenciamento de dependências usando buildSrc
  - Injeção de Dependência com Koin
  - Room Database
  - TDD
- - JUnit
- - Mockito
- - Barista
+ - Testes Unitários (JUnit e Mockito)
  
  # Telas
- 
- ![Screenshot_20220909_005853-1](https://user-images.githubusercontent.com/79026006/189275128-b76013e1-2be9-4820-a28e-edd9e1fdbc06.jpg)
- ![Screenshot_20220909_005901-1](https://user-images.githubusercontent.com/79026006/189275146-0f561cd0-045f-4e4e-83f6-f053e378eeca.jpg)
-
- 
- # Demonstração
-
+  <div style="display: inline_block"><br>
+ <img align="center" height="620" width="280"  src="https://user-images.githubusercontent.com/79026006/211114290-1f4fcca0-e435-4d7e-aae2-dea3dd415aa5.png">
+ <img align="center" height="620" width="280"  src="https://user-images.githubusercontent.com/79026006/211114291-5322ecd4-0c26-45eb-8ac5-9e53fc8a36d1.png">
+ <img align="center" height="620" width="280"  src="https://user-images.githubusercontent.com/79026006/211114296-e7598f41-479c-42d0-a332-80580b62b6c1.png">
+</div>
 
 
-https://user-images.githubusercontent.com/79026006/189275885-aa0d25b3-73ab-45e4-b8c0-6966ac05aa93.mp4
+
+
 
 
