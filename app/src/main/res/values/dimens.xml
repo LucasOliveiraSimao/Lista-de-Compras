@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_item_textView_padding">5dp</dimen>
+    <dimen name="default_item_cardView_cardElevation">3dp</dimen>
+    <dimen name="default_item_cardView_cardCornerRadius">5dp</dimen>
+    <dimen name="default_item_cardView_margin">5dp</dimen>
+    <dimen name="default_item_constraintLayout_marginHorizontal">8dp</dimen>
+
+    <dimen name="default_home_constraintLayout_padding">8dp</dimen>
+
+    <dimen name="default_insert_cardView_cardElevation">3dp</dimen>
+    <dimen name="default_insert_cardView_cardCornerRadius">5dp</dimen>
+    <dimen name="default_insert_cardView_margin">5dp</dimen>
+    <dimen name="default_insert_constraintLayout_margin">5dp</dimen>
+    <dimen name="default_insert_editText_margin">10dp</dimen>
+    <dimen name="default_insert_materialButton_marginStart">8dp</dimen>
+    <dimen name="default_insert_materialButton_marginTop">16dp</dimen>
+    <dimen name="default_insert_materialButton_marginEnd">8dp</dimen>
+</resources>

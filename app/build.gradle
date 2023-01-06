@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-parcelize'
+    id 'com.github.triplet.play'
 }
 
 android {
@@ -13,10 +14,16 @@ android {
         applicationId "com.lucassimao.listadecompras"
         minSdk 21
         targetSdk 32
-        versionCode 1
+        versionCode 4
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    kapt {
+        arguments {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
     }
 
     buildTypes {
@@ -35,6 +42,10 @@ android {
     viewBinding {
         enabled = true
     }
+}
+
+play {
+    serviceAccountCredentials.set(file("service-account.json"))
 }
 
 dependencies {

@@ -1,4 +1,4 @@
-package com.lucassimao.listadecompras.ui
+package com.lucassimao.listadecompras.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,10 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.lucassimao.listadecompras.R
 import com.lucassimao.listadecompras.data.model.PurchaseModel
 import com.lucassimao.listadecompras.databinding.FragmentUpdateBinding
+import com.lucassimao.listadecompras.ui.PurchaseViewModel
+import com.lucassimao.listadecompras.utils.formatMoneyToBrazilianFormat
 import com.lucassimao.listadecompras.utils.isFieldValid
 import com.lucassimao.listadecompras.utils.warningMessage
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -27,9 +28,14 @@ class UpdateFragment : Fragment() {
         val bundle = arguments?.getParcelable<PurchaseModel>("key")
         checkBundlePurchase(bundle)
 
-        binding.updateBtnInsert.setOnClickListener(checkFields(bundle))
+        binding.updatePurchasePrice.formatMoneyToBrazilianFormat()
+
+        binding.updateBtnInsert.setOnClickListener {
+            checkFields(bundle)
+        }
+
         binding.updateBtnCancel.setOnClickListener {
-            findNavController().popBackStack()
+            goToHomeScreen()
         }
 
         return binding.root
@@ -43,36 +49,46 @@ class UpdateFragment : Fragment() {
         }
     }
 
-    private fun checkFields(bundle: PurchaseModel?): (View) -> Unit = {
-        val view = requireView()
-        val message = getString(R.string.warning_message)
+    private fun checkFields(bundle: PurchaseModel?) {
 
         if (!isFieldValid(binding.updatePurchaseName.text)) {
-            warningMessage(view, message).show()
+            warningMessage(getString(R.string.update_empty_name_field_warning)).show()
+            return
         }
         if (!isFieldValid(binding.updatePurchaseQuantity.text)) {
-            warningMessage(view, message).show()
+            warningMessage(getString(R.string.update_empty_quantity_field_warning)).show()
+            return
         }
         if (!isFieldValid(binding.updatePurchasePrice.text)) {
-            warningMessage(view, message).show()
-        } else {
-            updatePurchase(bundle)
+            warningMessage(getString(R.string.update_empty_price_field_warning)).show()
+            return
         }
+        updatePurchase(bundle)
     }
 
     private fun updatePurchase(bundle: PurchaseModel?) {
         if (bundle != null) {
+
+            val productId = bundle.item_id
+            val productName = binding.updatePurchaseName.text.toString()
+            val productQuantity = binding.updatePurchaseQuantity.text.toString().toInt()
+            val productPrice = binding.updatePurchasePrice.text.toString()
+
             binding.apply {
                 viewModel.update(
-                    bundle.item_id,
-                    updatePurchaseName.text.toString(),
-                    updatePurchaseQuantity.text.toString().toInt(),
-                    updatePurchasePrice.text.toString()
+                    productId,
+                    productName,
+                    productQuantity,
+                    productPrice
                 )
             }
-            Snackbar.make(requireView(), getString(R.string.save_message), Snackbar.LENGTH_SHORT).show()
-            findNavController().popBackStack()
+            warningMessage(getString(R.string.update_notice_saved))
+            goToHomeScreen()
         }
+    }
+
+    private fun goToHomeScreen() {
+        findNavController().popBackStack()
     }
 
 }

@@ -17,4 +17,7 @@ interface PurchaseDAO {
 
     @Delete
     suspend fun deletePurchase(purchase: PurchaseModel)
+
+    @Query("DELETE FROM purchase_table")
+    suspend fun deleteAllPurchase()
 }

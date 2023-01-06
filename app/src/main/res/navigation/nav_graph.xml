@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.lucassimao.listadecompras.ui.HomeFragment"
+        android:name="com.lucassimao.listadecompras.ui.fragments.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/insertFragment"
-        android:name="com.lucassimao.listadecompras.ui.InsertFragment"
+        android:name="com.lucassimao.listadecompras.ui.fragments.InsertFragment"
         android:label="fragment_insert"
         tools:layout="@layout/fragment_insert" />
     <fragment
         android:id="@+id/updateFragment"
-        android:name="com.lucassimao.listadecompras.ui.UpdateFragment"
+        android:name="com.lucassimao.listadecompras.ui.fragments.UpdateFragment"
         android:label="fragment_update"
         tools:layout="@layout/fragment_update" />
 </navigation>

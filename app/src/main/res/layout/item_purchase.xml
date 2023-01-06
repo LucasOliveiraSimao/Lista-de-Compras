@@ -4,70 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:backgroundTint="@color/blue_shade_2"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="3dp">
+    android:layout_margin="@dimen/default_item_cardView_margin"
+    app:cardCornerRadius="@dimen/default_item_cardView_cardCornerRadius"
+    app:cardElevation="@dimen/default_item_cardView_cardElevation">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:orientation="horizontal">
+        android:layout_marginHorizontal="@dimen/default_item_constraintLayout_marginHorizontal"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/item_name"
+            style="@style/DefaultTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:padding="5dp"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            tools:text="Produto" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/item_product_name" />
 
         <TextView
             android:id="@+id/item_quantity"
             android:layout_width="0dp"
+            style="@style/DefaultTextView"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:padding="5dp"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            tools:text="Quantidade" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="@string/times"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/item_price"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/item_product_quantity" />
 
         <TextView
             android:id="@+id/item_price"
             android:layout_width="0dp"
+            style="@style/DefaultTextView"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:padding="5dp"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            tools:text="@string/price" />
-
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/item_more_purchase"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/item_product_price" />
 
         <ImageView
-            android:id="@+id/item_delete_purchase"
+            android:id="@+id/item_more_purchase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.5"
-            android:contentDescription="@string/delete"
-            android:src="@drawable/ic_delete"
-            app:tint="@color/white" />
+            android:contentDescription="@string/item_description_delete"
+            android:src="@drawable/ic_more_vert"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

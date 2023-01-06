@@ -1,4 +1,4 @@
-package com.lucassimao.listadecompras.ui
+package com.lucassimao.listadecompras.ui.fragments.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,10 @@ import androidx.navigation.fragment.findNavController
 import com.lucassimao.listadecompras.R
 import com.lucassimao.listadecompras.data.model.PurchaseModel
 import com.lucassimao.listadecompras.databinding.FragmentHomeBinding
-import com.lucassimao.listadecompras.utils.formatPrice
+import com.lucassimao.listadecompras.ui.PurchaseViewModel
+import com.lucassimao.listadecompras.utils.putCommaPrice
+import com.lucassimao.listadecompras.utils.putPointPrice
+import com.lucassimao.listadecompras.utils.putTwoDecimalPlaces
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -28,15 +31,25 @@ class HomeFragment : Fragment() {
         binding.fabInsertPurchase.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_insertFragment)
         }
+
+        binding.btnDeleteAll.setOnClickListener {
+            deleteAllPurchaseList()
+        }
+
         return binding.root
     }
 
+    private fun deleteAllPurchaseList() {
+        viewModel.deleteAllPurchase()
+    }
+
     private fun setupRecyclerView() {
-        adapter = PurchaseAdapter(onItemClick = {
-            deletePurchase(it)
-        }, onLongItemClick = {
-            goToUpdatePurchaseFragment(it)
-        })
+
+        adapter = PurchaseAdapter()
+
+        deletePurchase()
+
+        updatePurchase()
 
         binding.rvListPurchases.adapter = adapter
 
@@ -46,7 +59,19 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun goToUpdatePurchaseFragment(item: PurchaseModel) {
+    private fun updatePurchase() {
+        adapter.updatePurchase = {
+            goToUpdateScreen(it)
+        }
+    }
+
+    private fun deletePurchase() {
+        adapter.deletePurchase = {
+            viewModel.delete(it)
+        }
+    }
+
+    private fun goToUpdateScreen(item: PurchaseModel) {
         val bundle = Bundle()
         bundle.putParcelable("key", item)
         findNavController().navigate(
@@ -54,17 +79,21 @@ class HomeFragment : Fragment() {
         )
     }
 
-    private fun deletePurchase(it: PurchaseModel) {
-        viewModel.delete(it)
+    private fun sumPurchases(purchases: List<PurchaseModel>?) {
+        var totalAmountOfPurchase = 0.0
+        purchases?.forEach {
+            totalAmountOfPurchase += multiplyQuantityTimesPrice(it)
+        }
+
+        binding.tvTotal.text = displayTotalPrice(totalAmountOfPurchase)
     }
 
-    private fun sumPurchases(it: List<PurchaseModel>?) {
-        var priceTotal = 0.0
-        it?.forEach {
-            priceTotal += (it.item_price.toDouble().times(it.item_quantity))
-        }
-        binding.tvTotal.text =
-            resources.getString(R.string.total_price, formatPrice(priceTotal))
-    }
+    private fun displayTotalPrice(totalAmountOfPurchase: Double) = resources.getString(
+        R.string.home_total_price,
+        totalAmountOfPurchase.putTwoDecimalPlaces().putCommaPrice()
+    )
+
+    private fun multiplyQuantityTimesPrice(it: PurchaseModel) =
+        (it.item_price.putPointPrice().toDouble().times(it.item_quantity))
 
 }

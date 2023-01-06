@@ -3,67 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:backgroundTint="@color/blue_shade_2"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="3dp">
+    android:layout_margin="@dimen/default_insert_cardView_margin"
+    android:backgroundTint="@color/white"
+    app:cardCornerRadius="@dimen/default_insert_cardView_cardCornerRadius"
+    app:cardElevation="@dimen/default_insert_cardView_cardElevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp">
+        android:layout_margin="@dimen/default_insert_constraintLayout_margin">
 
-        <TextView
-            android:id="@+id/header"
-            android:layout_width="0dp"
+        <EditText
+            android:id="@+id/update_purchase_name"
+            style="@style/DefaultEditText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="@string/add_item_car"
-            android:textColor="@color/white"
-            android:textSize="18sp"
+            android:autofillHints=""
+            android:hint="@string/update_product"
+            android:inputType="textCapSentences"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/update_purchase_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:autofillHints=""
-            android:hint="@string/product"
-            android:inputType="textCapSentences"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header" />
-
-        <EditText
             android:id="@+id/update_purchase_quantity"
+            style="@style/DefaultEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:autofillHints=""
-            android:hint="@string/quantity"
+            android:hint="@string/update_quantity"
             android:inputType="number"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:maxLength="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/update_purchase_name" />
 
         <EditText
             android:id="@+id/update_purchase_price"
+            style="@style/DefaultEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:autofillHints=""
-            android:hint="@string/price"
+            android:hint="@string/update_price"
             android:inputType="numberDecimal"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/update_purchase_quantity" />
@@ -72,9 +54,9 @@
             android:id="@+id/update_btn_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/cancel"
+            android:layout_marginStart="@dimen/default_insert_materialButton_marginStart"
+            android:layout_marginTop="@dimen/default_insert_materialButton_marginTop"
+            android:text="@string/update_cancel"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/update_btn_insert"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,16 +66,15 @@
             android:id="@+id/update_btn_insert"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/default_insert_materialButton_marginStart"
+            android:layout_marginTop="@dimen/default_insert_materialButton_marginTop"
+            android:layout_marginEnd="@dimen/default_insert_materialButton_marginEnd"
             android:backgroundTint="@color/blue_shade_1"
-            android:text="@string/insert"
+            android:text="@string/update_save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/update_btn_cancel"
             app:layout_constraintTop_toBottomOf="@id/update_purchase_price" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

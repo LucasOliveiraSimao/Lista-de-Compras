@@ -18,4 +18,8 @@ class PurchaseRepository(private val dao: PurchaseDAO) {
     suspend fun delete(purchase: PurchaseModel) {
         return dao.deletePurchase(purchase)
     }
+
+    suspend fun deleteAllPurchases() {
+        return dao.deleteAllPurchase()
+    }
 }
