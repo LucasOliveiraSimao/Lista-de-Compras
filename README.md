@@ -29,6 +29,7 @@ Para usar este aplicativo, basta seguir os seguintes passos:
  - Room Database
  - TDD
  - Testes Unitários (JUnit e Mockito)
+ - Conceitos de CI
  
  # Telas
   <div style="display: inline_block"><br>
