@@ -120,7 +120,7 @@ obj/
 .idea/jarRepositories.xml
 .idea/navEditor.xml
 .idea/androidTestResultsUserPreferences.xml
-
+.idea/kotlinc.xml
 # Legacy Eclipse project files
 .classpath
 .project
