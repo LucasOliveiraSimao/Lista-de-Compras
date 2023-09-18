@@ -124,6 +124,7 @@ app/release/output-metadata.json
 .idea/androidTestResultsUserPreferences.xml
 .idea/kotlinc.xml
 .idea/inspectionProfiles/Project_Default.xml
+.idea/deploymentTargetDropDown.xml
 # Legacy Eclipse project files
 .classpath
 .project
