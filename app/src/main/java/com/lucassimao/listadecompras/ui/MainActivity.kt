@@ -5,7 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.lucassimao.listadecompras.ui.compose.InsertPurchase
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.lucassimao.listadecompras.ui.compose.navigation.SetupNavigation
 import com.lucassimao.listadecompras.ui.ui.theme.ListaDeComprasTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +15,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ListaDeComprasTheme {
-                InsertPurchase()
+                val navController: NavHostController = rememberNavController()
+                SetupNavigation(navController)
             }
         }
     }
@@ -23,6 +26,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ListaDeComprasTheme {
-        InsertPurchase()
+
     }
 }
