@@ -56,6 +56,11 @@
 
     <!--  Insert Purchase  -->
     <string name="add_item_to_cart">Adicionar item no carrinho</string>
+    <string name="purchase_list_title">Lista de Compras</string>
     <!--  Insert Purchase  -->
+
+<!-- Home Content   -->
+    <string name="delete_everything">Apagar tudo</string>
+<!-- Home Content  -->
 
 </resources>
