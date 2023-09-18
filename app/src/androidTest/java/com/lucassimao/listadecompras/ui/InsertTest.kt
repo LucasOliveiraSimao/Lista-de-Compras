@@ -1,13 +1,24 @@
 package com.lucassimao.listadecompras.ui
 
-import com.lucassimao.listadecompras.utils.BaseUITest
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
+import com.lucassimao.listadecompras.ui.compose.insert.InsertScreen
+import org.junit.Rule
 import org.junit.Test
 
 
-class InsertFragmentTest : BaseUITest() {
+class InsertTest {
+
+    @get:Rule
+    val composeTestRule = createComposeRule()
 
     @Test
     fun shouldDisplayWarningMessage_whenProductNameFieldIsEmpty() {
+        composeTestRule.setContent {
+            InsertScreen()
+        }
+        composeTestRule.onNodeWithText("Salvar").assertIsDisplayed()
 //        clickOn(R.id.fab_insert_purchase)
 //        clickOn(R.id.btn_insert)
 //        assertDisplayed(R.string.warning_message)
