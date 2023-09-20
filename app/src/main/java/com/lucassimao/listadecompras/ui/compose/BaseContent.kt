@@ -18,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -59,7 +60,7 @@ fun BaseContent(modifier: Modifier = Modifier) {
 
         OutlinedTextField(
             value = productName,
-            modifier = fullWidthModifier,
+            modifier = fullWidthModifier.testTag("ProductNameField"),
             onValueChange = {
                 productName = it
             },
@@ -76,7 +77,7 @@ fun BaseContent(modifier: Modifier = Modifier) {
 
         OutlinedTextField(
             value = productAmount,
-            modifier = fullWidthModifier,
+            modifier = fullWidthModifier.testTag("ProductAmountField"),
             onValueChange = {
                 if (it.length <= 3) {
                     productAmount = it
@@ -93,7 +94,7 @@ fun BaseContent(modifier: Modifier = Modifier) {
 
         OutlinedTextField(
             value = productPrice,
-            modifier = fullWidthModifier,
+            modifier = fullWidthModifier.testTag("ProductPriceField"),
             onValueChange = {
                 productPrice = if (it.startsWith("0")) {
                     ""
