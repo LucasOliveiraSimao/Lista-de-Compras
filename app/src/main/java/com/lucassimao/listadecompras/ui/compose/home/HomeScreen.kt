@@ -8,6 +8,8 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -16,7 +18,7 @@ import com.lucassimao.listadecompras.utils.Routes.INSERT
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(navController: NavHostController = rememberNavController()) {
     Scaffold(
         topBar = {
             Toolbar()
@@ -27,7 +29,7 @@ fun HomeScreen(navController: NavHostController) {
         floatingActionButton = {
             FloatingActionButton(onClick = {
                 navController.navigate(INSERT)
-            }) {
+            }, modifier = Modifier.testTag("Fab")) {
                 Icon(Icons.Filled.Add, contentDescription = null)
             }
         }
