@@ -46,4 +46,21 @@
     <string name="menu_update_purchase">Editar</string>
     <!--  Popup menu end  -->
 
+    <!--  Base Content -->
+    <string name="product_name">Produto</string>
+    <string name="product_amount">Quantidade</string>
+    <string name="product_price">Preço</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Salvar</string>
+    <!-- Base Content -->
+
+    <!--  Insert Purchase  -->
+    <string name="add_item_to_cart">Adicionar item no carrinho</string>
+    <string name="purchase_list_title">Lista de Compras</string>
+    <!--  Insert Purchase  -->
+
+<!-- Home Content   -->
+    <string name="delete_everything">Apagar tudo</string>
+<!-- Home Content  -->
+
 </resources>

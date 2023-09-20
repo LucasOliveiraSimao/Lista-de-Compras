@@ -94,6 +94,8 @@ obj/
 *.iws
 /out/
 
+app/release/output-metadata.json
+
 # User-specific configurations
 .idea/caches/
 .idea/libraries/
@@ -120,7 +122,9 @@ obj/
 .idea/jarRepositories.xml
 .idea/navEditor.xml
 .idea/androidTestResultsUserPreferences.xml
-
+.idea/kotlinc.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/deploymentTargetDropDown.xml
 # Legacy Eclipse project files
 .classpath
 .project
