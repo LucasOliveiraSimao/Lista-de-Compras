@@ -1,8 +1,6 @@
 package com.lucassimao.listadecompras.ui
 
-import com.lucassimao.listadecompras.utils.BaseUITest
-
-class HomeFragmentTest : BaseUITest() {
+//class HomeFragmentTest : BaseUITest() {
 
 //    @Test
 //    fun shouldDisplayTitle() {
@@ -24,4 +22,4 @@ class HomeFragmentTest : BaseUITest() {
 ////        clickOn(R.id.fab_insert_purchase)
 //    }
 
-}
+//}

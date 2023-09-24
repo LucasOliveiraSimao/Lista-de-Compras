@@ -1,8 +1,6 @@
 package com.lucassimao.listadecompras.ui
 
-import com.lucassimao.listadecompras.utils.BaseUITest
-
-class UpdateFragmentTest : BaseUITest() {
+//class UpdateFragmentTest : BaseUITest() {
 
 //    @Test
 //    fun shouldNavigateToUpdateScreen() {
@@ -76,4 +74,4 @@ class UpdateFragmentTest : BaseUITest() {
 ////        clickOn(R.id.update_btn_cancel)
 ////        assertDisplayed(R.id.fab_insert_purchase)
 //    }
-}
+//}
