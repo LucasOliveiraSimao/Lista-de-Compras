@@ -73,9 +73,13 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:2.7.2")
 
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+
+    implementation "io.insert-koin:koin-androidx-compose:3.5.0"
+
     implementation Deps.room_runtime
     implementation Deps.room_ktx
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
     implementation 'androidx.activity:activity-compose:1.7.2'
     implementation platform('androidx.compose:compose-bom:2023.03.00')
     implementation 'androidx.compose.ui:ui'
@@ -93,7 +97,7 @@ dependencies {
     implementation Deps.coroutines_android
     implementation Deps.coroutines_core
 
-    implementation Deps.view_model
+//    implementation Deps.view_model
     implementation Deps.livedata
 
     implementation Deps.koin

@@ -13,6 +13,6 @@ import com.lucassimao.listadecompras.utils.Routes.INSERT
 fun SetupNavigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = HOME) {
         composable(HOME) { HomeScreen(navController) }
-        composable(INSERT) { InsertScreen() }
+        composable(INSERT) { InsertScreen(navController) }
     }
 }

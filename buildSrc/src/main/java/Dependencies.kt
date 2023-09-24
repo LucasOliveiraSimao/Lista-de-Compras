@@ -35,7 +35,7 @@ object Deps{
     const val test_ext = "androidx.test.ext:junit:${Version.test_ext}"
     const val espresso_core = "androidx.test.espresso:espresso-core:${Version.espresso_core}"
     const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Version.lifecycle}"
-    const val view_model = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.lifecycle}"
+//    const val view_model = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.lifecycle}"
     const val coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Version.coroutines}"
     const val activity_ktx = "androidx.activity:activity-ktx:${Version.activity_ktx}"
     const val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Version.navigation}"
