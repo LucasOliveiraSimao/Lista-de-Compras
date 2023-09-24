@@ -46,7 +46,7 @@ jobs:
   instrumentation-test:
     needs: [ unit-test ]
     name: Run Instrumentation Tests
-    runs-on: windows-latest
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v2
