@@ -1,8 +1,6 @@
 package com.lucassimao.listadecompras.ui
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.lucassimao.listadecompras.data.PurchaseRepository
 import com.lucassimao.listadecompras.data.model.PurchaseModel
@@ -12,12 +10,7 @@ class PurchaseViewModel(
     private val repository: PurchaseRepository
 ) : ViewModel() {
 
-    val getAllPurchase = liveData {
-        emitSource(
-            repository.getAllPurchase
-                .asLiveData()
-        )
-    }
+    val getAllPurchase = repository.getAllPurchase
 
     fun insert(name: String, quantity: Int, price: String) {
         val purchaseItem = PurchaseModel(0, name, quantity, price)
