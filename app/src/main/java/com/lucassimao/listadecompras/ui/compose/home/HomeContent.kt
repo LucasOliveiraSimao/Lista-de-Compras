@@ -11,15 +11,21 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lucassimao.listadecompras.R
+import com.lucassimao.listadecompras.ui.PurchaseViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HomeContent(modifier: Modifier = Modifier) {
+fun HomeContent(
+    modifier: Modifier = Modifier,
+    viewModel: PurchaseViewModel = koinViewModel()
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -35,14 +41,15 @@ fun HomeContent(modifier: Modifier = Modifier) {
             }
         }
 
+        val productList = viewModel.getAllPurchase.collectAsState(initial = emptyList())
+
         LazyColumn(modifier = Modifier.padding(8.dp)) {
-            items((1..100).toList()) {
-                ItemList()
+            items(productList.value) {
+                ItemList(it)
             }
         }
 
     }
-
 
 }
 
