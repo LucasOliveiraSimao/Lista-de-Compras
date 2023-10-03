@@ -20,9 +20,6 @@ import com.lucassimao.listadecompras.utils.Routes.INSERT
 @Composable
 fun HomeScreen(navController: NavHostController = rememberNavController()) {
     Scaffold(
-        topBar = {
-            Toolbar()
-        },
         content = {
             HomeContent()
         },
