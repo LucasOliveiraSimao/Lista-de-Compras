@@ -3,6 +3,7 @@ package com.lucassimao.listadecompras.utils
 import android.text.Editable
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.lucassimao.listadecompras.data.model.PurchaseModel
 
 fun isFieldValid(field: Editable): Boolean {
     if (field.isEmpty()) {
@@ -23,6 +24,17 @@ fun Fragment.warningMessage(message: String): Snackbar = Snackbar.make(
 fun String.putBrazilianMoneySymbol(): String {
     return "R$ $this"
 }
+
+fun calculateTotalPurchase(value: List<PurchaseModel>): String {
+    var totalAmountOfPurchase = 0.0
+    value.forEach {
+        totalAmountOfPurchase += multiplyQuantityTimesPrice(it)
+    }
+    return totalAmountOfPurchase.putTwoDecimalPlaces().putCommaPrice()
+}
+
+private fun multiplyQuantityTimesPrice(it: PurchaseModel) =
+    (it.item_price.putPointPrice().toDouble().times(it.item_quantity))
 
 fun Int.putTimesSymbol(): String {
     return "$this x"

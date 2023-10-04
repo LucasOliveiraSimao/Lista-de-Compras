@@ -16,11 +16,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.lucassimao.listadecompras.data.model.PurchaseModel
+import com.lucassimao.listadecompras.utils.putTwoDecimalPlaces
 
 @Composable
-fun ItemList(modifier: Modifier = Modifier) {
+fun ItemList(
+    product: PurchaseModel,
+    modifier: Modifier = Modifier,
+) {
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -33,14 +38,16 @@ fun ItemList(modifier: Modifier = Modifier) {
             modifier = modifier.padding(2.dp)
         ) {
             Text(
-                text = "Arroz",
+                text = product.item_name,
+                fontSize = 24.sp,
                 modifier = modifier
                     .weight(1f)
                     .padding(start = 6.dp),
                 color = Color.Black
             )
             Text(
-                text = "2 x",
+                text = "${product.item_quantity} x",
+                fontSize = 24.sp,
                 modifier = modifier
                     .weight(1f)
                     .padding(end = 16.dp),
@@ -48,7 +55,8 @@ fun ItemList(modifier: Modifier = Modifier) {
                 color = Color.Black
             )
             Text(
-                text = "R$ 2,00",
+                text = "R$ ${product.item_price.toDouble().putTwoDecimalPlaces()}",
+                fontSize = 24.sp,
                 modifier = modifier.weight(1f),
                 color = Color.Black
             )
@@ -58,10 +66,4 @@ fun ItemList(modifier: Modifier = Modifier) {
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewItemList() {
-    ItemList()
 }

@@ -4,11 +4,11 @@ import com.google.common.truth.Truth
 import com.lucassimao.listadecompras.data.PurchaseRepository
 import com.lucassimao.listadecompras.data.model.PurchaseModel
 import com.lucassimao.listadecompras.utils.BaseUnitTest
-import com.lucassimao.listadecompras.utils.getValueForTest
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -38,73 +38,81 @@ class PurchaseViewModelTest : BaseUnitTest() {
     private val emptyPurchaseList = listOf<PurchaseModel>()
 
     @Test
-    fun `should invoke the insert function into the repository layer's database`(): Unit = runBlocking {
+    fun `should invoke the insert function into the repository layer's database`(): Unit =
+        runBlocking {
 
-        viewModel.insert("Product", 1, "1.99")
+            viewModel.insert("Product", 1, "1.99")
 
-        verify(repository, times(1)).insert(purchase)
-    }
+            verify(repository, times(1)).insert(purchase)
+        }
 
     @Test
     fun `should insert new purchase in the database`(): Unit = runBlocking {
 
         viewModel.insert("Product", 1, "1.99")
 
-        val actual = mockSuccessfulCase().getAllPurchase.getValueForTest()?.get(0)
+        val actual = mockSuccessfulCase().getAllPurchase.first()[0]
 
         Truth.assertThat(actual).isEqualTo(purchaseItem)
     }
 
     @Test
-    fun `should invoke the update function into the repository layer's database`(): Unit = runBlocking {
+    fun `should invoke the update function into the repository layer's database`(): Unit =
+        runBlocking {
 
-        viewModel.update(1, "Product", 1, "1.99")
+            viewModel.update(1, "Product", 1, "1.99")
 
-        verify(repository, times(1)).update(purchaseItem)
-    }
+            verify(repository, times(1)).update(purchaseItem)
+        }
 
     @Test
     fun `should update data of a purchase saved in the database`(): Unit = runBlocking {
 
         viewModel.update(1, "Product", 3, "1.99")
 
-        val actual = mockUpdateSuccessfulCase().getAllPurchase.getValueForTest()?.get(0)
+        val actual = mockUpdateSuccessfulCase().getAllPurchase.first()[0]
 
         Truth.assertThat(actual).isEqualTo(updatePurchaseItem)
     }
 
     @Test
-    fun `should invoke the delete function into the repository layer's database`(): Unit = runBlocking {
+    fun `should invoke the delete function into the repository layer's database`(): Unit =
+        runBlocking {
 
-        viewModel.delete(purchaseItem)
+            viewModel.delete(purchaseItem)
 
-        verify(repository, times(1)).delete(purchaseItem)
-    }
+            verify(repository, times(1)).delete(purchaseItem)
+        }
 
     @Test
     fun `should delete an item from the purchase list`(): Unit = runBlocking {
 
         viewModel.delete(deletePurchaseItem)
 
-        val actual = mockDeleteSuccessfulCase().getAllPurchase.getValueForTest()?.contains(deletePurchaseItem)
+        val actual = mockDeleteSuccessfulCase().getAllPurchase.first()[0]
 
-        Truth.assertThat(actual).isFalse()
+        Truth.assertThat(actual).isNotEqualTo(deletePurchaseItem)
     }
 
     @Test
-    fun `should invoke the deleteAllPurchases function into the repository layer's database`(): Unit = runBlocking {
+    fun `should invoke the deleteAllPurchases function into the repository layer's database`(): Unit =
+        runBlocking {
 
-        viewModel.deleteAllPurchase()
+            viewModel.deleteAllPurchase()
 
-        verify(repository, times(1)).deleteAllPurchases()
-    }
+            verify(repository, times(1)).deleteAllPurchases()
+        }
 
     @Test
     fun `should delete all items from the purchase list`(): Unit = runBlocking {
 
+        var actual = listOf<PurchaseModel>()
+
         viewModel.deleteAllPurchase()
 
-        val actual = mockEmptyCase().getAllPurchase.getValueForTest()
+        mockEmptyCase().getAllPurchase.collect {
+            actual = it
+        }
 
         Truth.assertThat(actual).isEqualTo(emptyPurchaseList)
     }
@@ -112,9 +120,15 @@ class PurchaseViewModelTest : BaseUnitTest() {
     @Test
     fun `should return a purchase list`(): Unit = runBlocking {
 
-       viewModel.getAllPurchase
+        viewModel.getAllPurchase
 
-        val actual = mockSuccessfulCase().getAllPurchase.getValueForTest()
+        val actual = arrayListOf<PurchaseModel>()
+
+        mockSuccessfulCase().getAllPurchase.collect { purchaseModels ->
+            purchaseModels.forEach {
+                actual.add(it)
+            }
+        }
 
         Truth.assertThat(actual).isEqualTo(purchaseList)
     }
@@ -124,7 +138,11 @@ class PurchaseViewModelTest : BaseUnitTest() {
 
         viewModel.getAllPurchase
 
-        val actual = mockEmptyCase().getAllPurchase.getValueForTest()
+        var actual = listOf<PurchaseModel>()
+
+        mockEmptyCase().getAllPurchase.collect{
+            actual = it
+        }
 
         Truth.assertThat(actual).isEqualTo(emptyPurchaseList)
     }

@@ -1,10 +1,10 @@
 package com.lucassimao.listadecompras.ui.fragments.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.lucassimao.listadecompras.R
 import com.lucassimao.listadecompras.data.model.PurchaseModel
@@ -53,10 +53,10 @@ class HomeFragment : Fragment() {
 
         binding.rvListPurchases.adapter = adapter
 
-        viewModel.getAllPurchase.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-            sumPurchases(it)
-        }
+//        viewModel.getAllPurchase.observe(viewLifecycleOwner) {
+//            adapter.submitList(it)
+//            sumPurchases(it)
+//        }
     }
 
     private fun updatePurchase() {
