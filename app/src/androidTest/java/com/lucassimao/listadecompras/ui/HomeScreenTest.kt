@@ -42,7 +42,7 @@ class HomeScreenTest : BaseUITest() {
 
         composeTestRule.onNode(hasText(textProductName)).assertIsDisplayed()
         composeTestRule.onNode(hasText(resultProductAmount)).assertIsDisplayed()
-//        composeTestRule.onNode(hasText(resultProductPrice)).assertIsDisplayed()
+        composeTestRule.onNode(hasText(resultProductPrice)).assertIsDisplayed()
     }
 
     @Test
