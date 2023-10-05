@@ -26,6 +26,7 @@ fun ItemList(
     product: PurchaseModel,
     modifier: Modifier = Modifier,
 ) {
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -35,7 +36,8 @@ fun ItemList(
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
-            modifier = modifier.padding(2.dp)
+            modifier = modifier
+                .padding(2.dp)
         ) {
             Text(
                 text = product.item_name,
