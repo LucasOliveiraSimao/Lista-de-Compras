@@ -19,12 +19,12 @@ import com.lucassimao.listadecompras.data.model.PurchaseModel
 
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
-fun DismissItem(
-    state: DismissState,
-    item: PurchaseModel
+fun SwipeItem(
+    dismissState: DismissState,
+    purchase: PurchaseModel
 ) {
     SwipeToDismiss(
-        state = state,
+        state = dismissState,
         background = {
             Box(
                 Modifier
@@ -41,7 +41,7 @@ fun DismissItem(
         },
         dismissContent = {
             ItemList(
-                product = item
+                purchase = purchase
             )
         }
     )

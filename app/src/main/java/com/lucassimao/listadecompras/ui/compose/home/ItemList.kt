@@ -23,10 +23,9 @@ import com.lucassimao.listadecompras.utils.putTwoDecimalPlaces
 
 @Composable
 fun ItemList(
-    product: PurchaseModel,
+    purchase: PurchaseModel,
     modifier: Modifier = Modifier,
 ) {
-
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -40,7 +39,7 @@ fun ItemList(
                 .padding(2.dp)
         ) {
             Text(
-                text = product.item_name,
+                text = purchase.item_name,
                 fontSize = 24.sp,
                 modifier = modifier
                     .weight(1f)
@@ -48,7 +47,7 @@ fun ItemList(
                 color = Color.Black
             )
             Text(
-                text = "${product.item_quantity} x",
+                text = "${purchase.item_quantity} x",
                 fontSize = 24.sp,
                 modifier = modifier
                     .weight(1f)
@@ -57,7 +56,7 @@ fun ItemList(
                 color = Color.Black
             )
             Text(
-                text = "R$ ${product.item_price.toDouble().putTwoDecimalPlaces()}",
+                text = "R$ ${purchase.item_price.toDouble().putTwoDecimalPlaces()}",
                 fontSize = 24.sp,
                 modifier = modifier.weight(1f),
                 color = Color.Black
