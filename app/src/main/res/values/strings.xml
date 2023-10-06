@@ -61,12 +61,15 @@
 
 <!-- Home Content   -->
     <string name="delete_everything">Apagar tudo</string>
-    <string name="test_tag_text_total">Test Tag Text Total</string>
     <string name="display_total_purchase_value">Total: R$ %1$s</string>
+    <string name="item_deleted_successfully">Item excluído com sucesso</string>
+    <!-- Home Content  -->
+
+    <!-- UI Test  -->
     <string name="tag_test_button_delete">Test Tag Button Delete</string>
     <string name="tag_test_list">Tag Test List</string>
-    <string name="item_deleted_successfully">Item excluído com sucesso</string>
+    <string name="test_tag_text_total">Test Tag Text Total</string>
     <string name="tag_test_button_add">Tag Test Button Add</string>
-    <!-- Home Content  -->
+    <!-- UI Test  -->
 
 </resources>
