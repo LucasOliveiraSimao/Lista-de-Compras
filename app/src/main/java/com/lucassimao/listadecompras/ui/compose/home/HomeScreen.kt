@@ -29,10 +29,10 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun HomeScreen(
     navController: NavHostController = rememberNavController(),
-    viewModel: PurchaseViewModel = koinViewModel(),
+    purchaseViewModel: PurchaseViewModel = koinViewModel(),
     modifier: Modifier = Modifier,
 ) {
-    val purchases = viewModel.getAllPurchase.collectAsState(initial = emptyList())
+    val purchases = purchaseViewModel.getAllPurchase.collectAsState(initial = emptyList())
 
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -42,19 +42,24 @@ fun HomeScreen(
             SnackbarHost(hostState = snackbarHostState)
         },
         content = {
-            HomeContent(modifier, purchases, viewModel, scope, snackbarHostState)
+            HomeContent(modifier, purchases, purchaseViewModel, scope, snackbarHostState)
         },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    navController.navigate(INSERT)
-                }, modifier = Modifier
-                    .testTag(stringResource(R.string.tag_test_button_add))
-            ) {
-                Icon(Icons.Filled.Add, contentDescription = null)
-            }
+            AddItemButton(navController, modifier)
         }
     )
+}
+
+@Composable
+private fun AddItemButton(navController: NavHostController, modifier: Modifier) {
+    FloatingActionButton(
+        onClick = {
+            navController.navigate(INSERT)
+        },
+        modifier = modifier.testTag(stringResource(R.string.tag_test_button_add))
+    ) {
+        Icon(Icons.Filled.Add, contentDescription = "Adiciona Nova Compra")
+    }
 }
 
 @Preview(showBackground = true)
