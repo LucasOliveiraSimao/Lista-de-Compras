@@ -32,7 +32,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-@OptIn(ExperimentalMaterialApi::class)
 fun HomeContent(
     modifier: Modifier,
     purchases: State<List<PurchaseModel>>,
@@ -45,66 +44,85 @@ fun HomeContent(
             .fillMaxSize()
             .padding(8.dp)
     ) {
-        Row(
+        TotalPurchaseAndDeleteButton(modifier, purchases, viewModel)
+        PurchaseList(modifier, purchases, scope, viewModel, snackbarHostState)
+
+    }
+}
+
+
+@Composable
+private fun TotalPurchaseAndDeleteButton(
+    modifier: Modifier,
+    purchases: State<List<PurchaseModel>>,
+    viewModel: PurchaseViewModel
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
             modifier = modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
+                .align(Alignment.CenterVertically)
+                .weight(1f)
+                .testTag(stringResource(R.string.test_tag_text_total)),
+            text = stringResource(
+                R.string.display_total_purchase_value,
+                calculateTotalPurchase(purchases.value)
+            ),
+            color = Color.White,
+            fontSize = 20.sp
+        )
+        OutlinedButton(
+            modifier = modifier
+                .weight(1f)
+                .testTag(stringResource(R.string.tag_test_button_delete)),
+            onClick = {
+                viewModel.deleteAllPurchase()
+            }) {
             Text(
-                modifier = modifier
-                    .align(Alignment.CenterVertically)
-                    .weight(1f)
-                    .testTag(stringResource(R.string.test_tag_text_total)),
-                text = stringResource(
-                    R.string.display_total_purchase_value,
-                    calculateTotalPurchase(purchases.value)
-                ),
+                text = stringResource(R.string.delete_everything),
                 color = Color.White,
-                fontSize = 20.sp
+                fontSize = 16.sp
             )
-            OutlinedButton(
-                modifier = modifier
-                    .weight(1f)
-                    .testTag(stringResource(R.string.tag_test_button_delete)),
-                onClick = {
-                    viewModel.deleteAllPurchase()
-                }) {
-                Text(
-                    text = stringResource(id = R.string.delete_everything),
-                    color = Color.White,
-                    fontSize = 16.sp
-                )
-            }
         }
+    }
+}
 
-        LazyColumn(
-            modifier = modifier
-                .padding(8.dp)
-                .testTag(stringResource(R.string.tag_test_list))
-        ) {
-            items(items = purchases.value, key = {
-                it.item_id
-            }) { item ->
+@Composable
+@OptIn(ExperimentalMaterialApi::class)
+private fun PurchaseList(
+    modifier: Modifier,
+    purchases: State<List<PurchaseModel>>,
+    scope: CoroutineScope,
+    viewModel: PurchaseViewModel,
+    snackbarHostState: SnackbarHostState
+) {
+    LazyColumn(
+        modifier = modifier
+            .padding(8.dp)
+            .testTag(stringResource(R.string.tag_test_list))
+    ) {
+        items(items = purchases.value, key = { it.item_id }) { item ->
 
-                val state = rememberDismissState(
-                    confirmStateChange = {
-                        if (it == DismissValue.DismissedToStart) {
-                            scope.launch {
-                                snackbarHostState.showSnackbar(
-                                    "Item excluído com sucesso",
-                                    duration = SnackbarDuration.Short
-                                )
-                            }
+            val state = rememberDismissState(
+                confirmStateChange = {
+                    if (it == DismissValue.DismissedToStart) {
+                        scope.launch {
                             viewModel.delete(item)
+                            snackbarHostState.showSnackbar(
+                                message = "Item excluído com sucesso",
+                                duration = SnackbarDuration.Short
+                            )
                         }
-                        true
                     }
-                )
+                    true
+                }
+            )
 
-                DismissItem(state, item)
-            }
+            SwipeItem(state, item)
         }
-
     }
 }
