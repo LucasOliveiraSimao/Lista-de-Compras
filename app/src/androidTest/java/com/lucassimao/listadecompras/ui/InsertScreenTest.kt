@@ -25,7 +25,7 @@ class InsertScreenTest:BaseUITest() {
     private val tagProductAmountField = "ProductAmountField"
     private val tagProductPriceField = "ProductPriceField"
 
-    private val tagFab = "Fab"
+    private val tagFab = "Tag Test Button Add"
 
 
     @Test

@@ -26,10 +26,10 @@ class HomeScreenTest : BaseUITest() {
     private val tagProductAmountField = "ProductAmountField"
     private val tagProductPriceField = "ProductPriceField"
 
-    private val tagFab = "Fab"
-    private val tagDelete = "Delete"
-    private val tagList = "List"
-    private val tagTotal = "Total"
+    private val tagFab = "Tag Test Button Add"
+    private val tagDelete = "Test Tag Button Delete"
+    private val tagList = "Tag Test List"
+    private val tagTotal = "Test Tag Text Total"
 
     @Test
     fun when_adding_new_product_should_display_in_the_list() {
