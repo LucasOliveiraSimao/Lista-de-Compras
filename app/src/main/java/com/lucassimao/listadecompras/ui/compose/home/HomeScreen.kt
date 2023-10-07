@@ -42,7 +42,7 @@ fun HomeScreen(
             SnackbarHost(hostState = snackbarHostState)
         },
         content = {
-            HomeContent(modifier, purchases, purchaseViewModel, scope, snackbarHostState)
+            HomeContent(modifier, purchases, purchaseViewModel, scope, snackbarHostState, navController)
         },
         floatingActionButton = {
             AddItemButton(navController, modifier)
