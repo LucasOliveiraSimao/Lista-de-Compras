@@ -33,8 +33,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.lucassimao.listadecompras.R
+import com.lucassimao.listadecompras.data.model.PurchaseModel
 import com.lucassimao.listadecompras.ui.PurchaseViewModel
 import com.lucassimao.listadecompras.utils.CurrencyAmountInputVisualTransformation
+import com.lucassimao.listadecompras.utils.putTwoDecimalPlaces
+import com.lucassimao.listadecompras.utils.removeComma
 import com.lucassimao.listadecompras.utils.removeLastTwoCharacters
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -44,6 +47,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun BaseContent(
     navController: NavHostController,
+    purchase: PurchaseModel?,
     modifier: Modifier = Modifier,
     viewModel: PurchaseViewModel = koinViewModel()
 ) {
@@ -77,7 +81,7 @@ fun BaseContent(
         ) {
 
             OutlinedTextField(
-                value = productName,
+                value = purchase?.item_name ?: productName,
                 modifier = fullWidthModifier.testTag("ProductNameField"),
                 onValueChange = {
                     productName = it
@@ -94,7 +98,7 @@ fun BaseContent(
             )
 
             OutlinedTextField(
-                value = productAmount,
+                value = if (purchase != null) purchase?.item_quantity.toString() else productAmount,
                 modifier = fullWidthModifier.testTag("ProductAmountField"),
                 onValueChange = {
                     if (it.length <= 3) {
@@ -111,7 +115,8 @@ fun BaseContent(
             )
 
             OutlinedTextField(
-                value = productPrice,
+                value = purchase?.item_price?.toDouble()?.putTwoDecimalPlaces()
+                    ?.removeComma() ?: productPrice,
                 modifier = fullWidthModifier.testTag("ProductPriceField"),
                 onValueChange = {
                     productPrice = if (it.startsWith("0")) {
@@ -178,5 +183,5 @@ fun BaseContent(
 @Composable
 fun Preview() {
     val navController: NavHostController = rememberNavController()
-    BaseContent(navController)
+    BaseContent(navController, null)
 }
