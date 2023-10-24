@@ -21,7 +21,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.lucassimao.listadecompras.R
 import com.lucassimao.listadecompras.ui.PurchaseViewModel
-import com.lucassimao.listadecompras.utils.Routes.INSERT
+import com.lucassimao.listadecompras.ui.compose.navigation.Routes.INSERT
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,7 +58,7 @@ private fun AddItemButton(navController: NavHostController, modifier: Modifier) 
         },
         modifier = modifier.testTag(stringResource(R.string.tag_test_button_add))
     ) {
-        Icon(Icons.Filled.Add, contentDescription = "Adiciona Nova Compra")
+        Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.add_new_purchase))
     }
 }
 

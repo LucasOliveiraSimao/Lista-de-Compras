@@ -31,7 +31,7 @@ import com.google.gson.Gson
 import com.lucassimao.listadecompras.R
 import com.lucassimao.listadecompras.data.model.PurchaseModel
 import com.lucassimao.listadecompras.ui.PurchaseViewModel
-import com.lucassimao.listadecompras.utils.Routes.UPDATE
+import com.lucassimao.listadecompras.ui.compose.navigation.Routes.UPDATE
 import com.lucassimao.listadecompras.utils.calculateTotalPurchase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -72,7 +72,7 @@ private fun TotalPurchaseAndDeleteButton(
             modifier = modifier
                 .align(Alignment.CenterVertically)
                 .weight(1f)
-                .testTag(stringResource(R.string.test_tag_text_total)),
+                .testTag(stringResource(R.string.tag_test_tag_text_total)),
             text = stringResource(
                 R.string.display_total_purchase_value,
                 calculateTotalPurchase(purchases.value)
