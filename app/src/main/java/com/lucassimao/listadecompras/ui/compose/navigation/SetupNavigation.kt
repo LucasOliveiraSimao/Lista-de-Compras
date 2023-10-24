@@ -10,9 +10,9 @@ import com.lucassimao.listadecompras.ui.compose.home.HomeScreen
 import com.lucassimao.listadecompras.ui.compose.insert.InsertScreen
 import com.lucassimao.listadecompras.ui.compose.update.UpdateScreen
 import com.lucassimao.listadecompras.utils.CustomType
-import com.lucassimao.listadecompras.utils.Routes.HOME
-import com.lucassimao.listadecompras.utils.Routes.INSERT
-import com.lucassimao.listadecompras.utils.Routes.UPDATE
+import com.lucassimao.listadecompras.ui.compose.navigation.Routes.HOME
+import com.lucassimao.listadecompras.ui.compose.navigation.Routes.INSERT
+import com.lucassimao.listadecompras.ui.compose.navigation.Routes.UPDATE
 
 @Composable
 fun SetupNavigation(navController: NavHostController) {

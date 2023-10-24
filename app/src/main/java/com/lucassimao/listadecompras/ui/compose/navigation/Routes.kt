@@ -1,4 +1,4 @@
-package com.lucassimao.listadecompras.utils
+package com.lucassimao.listadecompras.ui.compose.navigation
 
 object Routes {
     const val HOME = "Home"
