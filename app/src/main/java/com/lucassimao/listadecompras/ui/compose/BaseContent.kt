@@ -12,17 +12,16 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -36,14 +35,14 @@ import com.lucassimao.listadecompras.R
 import com.lucassimao.listadecompras.data.model.PurchaseModel
 import com.lucassimao.listadecompras.ui.PurchaseViewModel
 import com.lucassimao.listadecompras.utils.CurrencyAmountInputVisualTransformation
+import com.lucassimao.listadecompras.ui.compose.navigation.Routes
 import com.lucassimao.listadecompras.utils.putTwoDecimalPlaces
 import com.lucassimao.listadecompras.utils.removeComma
 import com.lucassimao.listadecompras.utils.removeLastTwoCharacters
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun BaseContent(
     navController: NavHostController,
@@ -52,27 +51,26 @@ fun BaseContent(
     viewModel: PurchaseViewModel = koinViewModel()
 ) {
 
-    val scope = rememberCoroutineScope()
-    val snackbarHostState = remember { SnackbarHostState() }
-
-    var productName by remember { mutableStateOf("") }
-
-    var productAmount by remember { mutableStateOf("") }
-
-    var productPrice by remember { mutableStateOf("") }
+    var productName by remember { mutableStateOf(purchase?.item_name ?: "") }
+    var productAmount by remember { mutableStateOf(purchase?.item_quantity ?: "") }
+    var productPrice by remember {
+        mutableStateOf(
+            purchase?.item_price?.toDouble()?.putTwoDecimalPlaces()?.removeComma() ?: ""
+        )
+    }
 
     val isProductNameEmpty = productName.isBlank()
-    val isProductAmountEmpty = productAmount.isBlank()
+    val isProductAmountEmpty = productAmount.toString().isBlank()
     val isProductAPriceEmpty = productPrice.isBlank()
 
     val isAnyFieldEmpty = isProductNameEmpty || isProductAmountEmpty || isProductAPriceEmpty
 
     val fullWidthModifier = modifier.fillMaxWidth()
 
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+
     Scaffold(
-        snackbarHost = {
-            SnackbarHost(hostState = snackbarHostState)
-        },
         containerColor = Color.White
     ) {
         Column(
@@ -81,8 +79,8 @@ fun BaseContent(
         ) {
 
             OutlinedTextField(
-                value = purchase?.item_name ?: productName,
-                modifier = fullWidthModifier.testTag("ProductNameField"),
+                value = productName,
+                modifier = fullWidthModifier.testTag(stringResource(R.string.tag_test_product_name_field)),
                 onValueChange = {
                     productName = it
                 },
@@ -98,8 +96,8 @@ fun BaseContent(
             )
 
             OutlinedTextField(
-                value = if (purchase != null) purchase?.item_quantity.toString() else productAmount,
-                modifier = fullWidthModifier.testTag("ProductAmountField"),
+                value = productAmount.toString(),
+                modifier = fullWidthModifier.testTag(stringResource(R.string.tag_test_product_amount_field)),
                 onValueChange = {
                     if (it.length <= 3) {
                         productAmount = it
@@ -115,9 +113,8 @@ fun BaseContent(
             )
 
             OutlinedTextField(
-                value = purchase?.item_price?.toDouble()?.putTwoDecimalPlaces()
-                    ?.removeComma() ?: productPrice,
-                modifier = fullWidthModifier.testTag("ProductPriceField"),
+                value = productPrice,
+                modifier = fullWidthModifier.testTag(stringResource(R.string.tag_test_product_price_field)),
                 onValueChange = {
                     productPrice = if (it.startsWith("0")) {
                         ""
@@ -155,17 +152,17 @@ fun BaseContent(
                 Button(
                     onClick = {
                         val result = productPrice.removeLastTwoCharacters()
-                        viewModel.insert(productName, productAmount.toInt(), result)
+                        viewModel.insert(productName, productAmount.toString().toInt(), result)
+                        keyboardController?.hide()
                         productName = ""
                         productAmount = ""
                         productPrice = ""
-                        scope.launch {
-                            snackbarHostState.showSnackbar("Item salvo com sucesso")
-                        }
+                        navController.navigate(Routes.HOME)
                     },
                     modifier = modifier
                         .weight(1f)
-                        .padding(8.dp),
+                        .padding(8.dp)
+                        .testTag(stringResource(R.string.tag_test_button_save)),
                     enabled = !isAnyFieldEmpty
                 ) {
                     Text(text = stringResource(R.string.save))
