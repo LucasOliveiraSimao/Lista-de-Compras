@@ -9,17 +9,18 @@ import org.junit.Test
 
 class DeleteFunction : BaseUITest() {
     @Test
-    fun must_delete_purchase_from_list() {
+    fun should_delete_purchase_from_list() {
         goToInsertScreen()
         addProduct()
-        cancel()
-        composeTestRule.onNode(hasTestTag(tagList)).performTouchInput { swipeLeft() }
+        saveProduct()
+
+        composeTestRule.onNode(hasTestTag(purchaseList)).performTouchInput { swipeLeft() }
         itemDoesNotExist()
     }
 
     private fun itemDoesNotExist() {
-        composeTestRule.onNode(hasText(textProductName)).assertDoesNotExist()
-        composeTestRule.onNode(hasText(textProductAmount2)).assertDoesNotExist()
-        composeTestRule.onNode(hasText(textProductPrice2)).assertDoesNotExist()
+        composeTestRule.onNode(hasText(rice)).assertDoesNotExist()
+        composeTestRule.onNode(hasText(quantity)).assertDoesNotExist()
+        composeTestRule.onNode(hasText(price14)).assertDoesNotExist()
     }
 }
