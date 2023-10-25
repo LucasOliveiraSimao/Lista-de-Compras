@@ -29,7 +29,7 @@ Para usar este aplicativo, basta seguir os seguintes passos:
  - Room Database
  - Testes Unitários (JUnit e Mockito)
  - Testes de UI
- - Conceitos de CI
+ - Conceitos de Continuous Integration (CI)
  - Este projeto passou por uma migração do formato XML para o Compose.
  
  # Telas
