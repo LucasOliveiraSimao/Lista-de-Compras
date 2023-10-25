@@ -19,17 +19,18 @@ Para usar este aplicativo, basta seguir os seguintes passos:
 ## Projeto desenvolvido utilizando:
 
  - Kotlin
- - Git Flow
+ - Compose
  - Arquitetura MVVM
  - Coroutines e Kotlin Flow
- - ViewModel e LiveData
+ - ViewModel
  - Navigation
  - Gerenciamento de dependências usando buildSrc
  - Injeção de Dependência com Koin
  - Room Database
- - TDD
  - Testes Unitários (JUnit e Mockito)
+ - Testes de UI
  - Conceitos de CI
+ - Este projeto passou por uma migração do formato XML para o Compose.
  
  # Telas
   <div style="display: inline_block"><br>
