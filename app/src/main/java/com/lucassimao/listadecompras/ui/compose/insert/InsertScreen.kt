@@ -38,7 +38,7 @@ fun InsertScreen(navController: NavHostController = rememberNavController()) {
                     fontSize = 24.sp,
                     modifier = Modifier.padding(8.dp)
                 )
-                BaseContent(navController)
+                BaseContent(navController, null)
             }
         }
     )

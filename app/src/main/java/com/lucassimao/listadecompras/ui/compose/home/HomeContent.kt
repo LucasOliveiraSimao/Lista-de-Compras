@@ -1,5 +1,6 @@
 package com.lucassimao.listadecompras.ui.compose.home
 
+import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,9 +25,13 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.google.gson.Gson
 import com.lucassimao.listadecompras.R
 import com.lucassimao.listadecompras.data.model.PurchaseModel
 import com.lucassimao.listadecompras.ui.PurchaseViewModel
+import com.lucassimao.listadecompras.ui.compose.navigation.Routes.UPDATE
 import com.lucassimao.listadecompras.utils.calculateTotalPurchase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -37,7 +42,8 @@ fun HomeContent(
     purchases: State<List<PurchaseModel>>,
     viewModel: PurchaseViewModel,
     scope: CoroutineScope,
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    navController: NavHostController,
 ) {
     Column(
         modifier = modifier
@@ -45,8 +51,7 @@ fun HomeContent(
             .padding(8.dp)
     ) {
         TotalPurchaseAndDeleteButton(modifier, purchases, viewModel)
-        PurchaseList(modifier, purchases, scope, viewModel, snackbarHostState)
-
+        PurchaseList(modifier, purchases, scope, viewModel, snackbarHostState, navController)
     }
 }
 
@@ -67,7 +72,7 @@ private fun TotalPurchaseAndDeleteButton(
             modifier = modifier
                 .align(Alignment.CenterVertically)
                 .weight(1f)
-                .testTag(stringResource(R.string.test_tag_text_total)),
+                .testTag(stringResource(R.string.tag_test_tag_text_total)),
             text = stringResource(
                 R.string.display_total_purchase_value,
                 calculateTotalPurchase(purchases.value)
@@ -98,7 +103,8 @@ private fun PurchaseList(
     purchases: State<List<PurchaseModel>>,
     scope: CoroutineScope,
     viewModel: PurchaseViewModel,
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    navController: NavHostController = rememberNavController()
 ) {
     LazyColumn(
         modifier = modifier
@@ -107,9 +113,10 @@ private fun PurchaseList(
     ) {
         items(items = purchases.value, key = { it.item_id }) { item ->
 
-            val state = rememberDismissState(
-                confirmStateChange = {
-                    if (it == DismissValue.DismissedToStart) {
+            val state = rememberDismissState {
+
+                when (it) {
+                    DismissValue.DismissedToStart -> {
                         scope.launch {
                             viewModel.delete(item)
                             snackbarHostState.showSnackbar(
@@ -117,10 +124,19 @@ private fun PurchaseList(
                                 duration = SnackbarDuration.Short
                             )
                         }
+                        false
                     }
-                    true
+
+                    DismissValue.DismissedToEnd -> {
+                        val purchase = Uri.encode(Gson().toJson(item))
+                        navController.navigate("$UPDATE/$purchase")
+                        false
+                    }
+                    else -> {
+                        false
+                    }
                 }
-            )
+            }
 
             SwipeItem(state, item)
         }

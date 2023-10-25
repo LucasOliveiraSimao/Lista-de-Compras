@@ -33,6 +33,11 @@ fun calculateTotalPurchase(value: List<PurchaseModel>): String {
     return totalAmountOfPurchase.putTwoDecimalPlaces().putCommaPrice()
 }
 
+fun String.removeComma(): String {
+    val stringWithoutComma = this.replace(",", "")
+    return stringWithoutComma ?: ""
+}
+
 private fun multiplyQuantityTimesPrice(it: PurchaseModel) =
     (it.item_price.putPointPrice().toDouble().times(it.item_quantity))
 

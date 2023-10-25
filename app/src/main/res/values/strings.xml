@@ -59,17 +59,27 @@
     <string name="purchase_list_title">Lista de Compras</string>
     <!--  Insert Purchase  -->
 
-<!-- Home Content   -->
+    <!-- Home Content   -->
     <string name="delete_everything">Apagar tudo</string>
     <string name="display_total_purchase_value">Total: R$ %1$s</string>
     <string name="item_deleted_successfully">Item excluído com sucesso</string>
+    <string name="add_new_purchase">Adiciona Nova Compra</string>
     <!-- Home Content  -->
 
     <!-- UI Test  -->
-    <string name="tag_test_button_delete">Test Tag Button Delete</string>
-    <string name="tag_test_list">Tag Test List</string>
-    <string name="test_tag_text_total">Test Tag Text Total</string>
-    <string name="tag_test_button_add">Tag Test Button Add</string>
+    <string name="tag_test_button_delete">button_delete</string>
+    <string name="tag_test_list">purchase_list</string>
+    <string name="tag_test_tag_text_total">Test Tag Text Total</string>
+    <string name="tag_test_button_add">button_add</string>
+    <string name="tag_test_product_name_field">product_name</string>
+    <string name="tag_test_product_amount_field">product_amount</string>
+    <string name="tag_test_product_price_field">product_price</string>
+    <string name="tag_test_button_save">button_save</string>
     <!-- UI Test  -->
+
+    <!-- Swipe Item  -->
+    <string name="description_delete">Deletar</string>
+    <string name="description_edit">Editar</string>
+    <!--  Swipe Item  -->
 
 </resources>
